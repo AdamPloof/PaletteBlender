@@ -1,0 +1,66 @@
+$bg-color: rgb(243, 243, 243);
+
+$pb-font-stack:  'Comfortaa', cursive, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+
+// ### --- Main Color Pallete --- ###
+
+// ## Primary ##
+$primary: #2583d6ff;
+$primary-darkest: #14222f;
+$primary-darker: #2d4457;
+$primary-dark: #195284ff;
+$primary-light: #67a9e3ff;
+$primary-lighter: #aed4f5ff;
+$primary-lightest: #daeaf8ff;
+
+// ## Greys ##
+$grey: #9faab5ff;
+$grey-darkest: #222426ff;
+$grey-darkerer: #2c3135;
+$grey-darker: #41494fff;
+$grey-dark: #6a6f77ff;
+$grey-light: #b4c0cdff;
+$grey-lighter: #d4dee9ff;
+$grey-lighterer: rgb(233, 239, 247);
+$grey-lightest: rgb(249, 252, 255);
+
+// ## Accents ##
+
+// Info
+$info: #32c4abff;
+$info-darkest: #08211dff;
+$info-darker: #1d7364ff;
+$info-dark: #289c88ff;
+$info-light: #66dfcbff;
+$info-lighter: #84ecdbff;
+$info-lightest: #c1fbf2ff;
+
+// Success
+$success: #57ca5fff;
+$success-darkest: #152816ff;
+$success-darker: #2f5931ff;
+$success-dark: #317c36ff;
+$success-light: #74dc7cff;
+$success-lighter: #9feca4ff;
+$success-lightest: #dafddcff;
+
+// Warning
+$warning: #f5eb57ff;
+$warning-darkest: #35331bff;
+$warning-darker: #747038ff;
+$warning-dark: #b0a94aff;
+$warning-light: #faf07fff;
+$warning-lighter: #fef8a4ff;
+$warning-lightest: #fffddaff;
+
+// Danger
+$danger: #fa4921ff;
+$danger-darkest: #2a0b04ff;
+$danger-darker: #712210ff;
+$danger-dark: #972e16ff;
+$danger-light: #f86746ff;
+$danger-lighter: #f88a72ff;
+$danger-lightest: #ffc8bcff;
+
+// ## Borders ##
+$border-main: 1px solid $grey;

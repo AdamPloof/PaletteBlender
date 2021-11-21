@@ -1,0 +1,38 @@
+@import "variables";
+
+.navbar {
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: $primary-dark;
+    border-bottom: $border-main;
+}
+
+.nav-left {
+    margin-left: 4rem;
+}
+
+.nav-list {
+    ul {
+        padding: 0;
+    }
+
+    ul > li {
+        display: inline-block;
+        list-style: none;
+        margin-right: 1rem;
+    }
+}
+
+.nav-link {
+    color: $primary-lightest;
+    text-decoration: none;
+
+    &:hover {
+        color: $primary-lighter;
+    }
+}

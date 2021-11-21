@@ -11,12 +11,26 @@
         Palette Blender
     {% endif %}
     </title>
+    {% load static %}
+
+    {% block stylesheets %}
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="{% static 'PaletteBlender/dist/main.css' %}" />
+    {% endblock stylesheets %}
 </head>
 <body>
-    {% block navbar %}
-    {% endblock %}
+    {% include "navbar.html" %}
 
     {% block body %}
     {% endblock %}
+
+    {% block javascripts %}
+        <script type="text/javascript" src="{% static 'PaletteBlender/dist/bundle.js' %}"></script>
+    {% endblock javascripts %}
 </body>
 </html>

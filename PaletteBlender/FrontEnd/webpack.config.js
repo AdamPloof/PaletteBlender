@@ -5,7 +5,7 @@ module.exports = {
     mode: 'development',
     entry: ["regenerator-runtime/runtime.js", path.resolve(__dirname, 'assets/js', 'index.js')],
     output: {
-      path: path.resolve(__dirname, '../static/CoSSandbox','dist'),
+      path: path.resolve(__dirname, '../static/PaletteBlender','dist'),
       filename: 'bundle.js'
     },
     module: {
