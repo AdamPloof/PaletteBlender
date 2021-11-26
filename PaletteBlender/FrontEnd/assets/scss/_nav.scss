@@ -1,5 +1,7 @@
 @import "variables";
 
+$sub-nav-height: 50px;
+
 .navbar {
     width: 100%;
     min-height: 40px;
@@ -8,17 +10,39 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    background-color: $primary-dark;
-    border-bottom: $border-main;
+
+    &.nav-first {
+        min-height: 40px;
+        font-size: 90%;
+    }
+
+    &.nav-second {
+        min-height: 70px;
+    }
+
+    &.nav-third {
+        min-height: $sub-nav-height;
+    }
+
+    &.nav-fourth {
+        min-height: 30px;
+        font-size: 95%;
+        padding: .5rem 0;
+    }
 }
 
 .nav-left {
     margin-left: 4rem;
 }
 
+.nav-right {
+    margin-right: 4rem;
+}
+
 .nav-list {
     ul {
         padding: 0;
+        margin: 0;
     }
 
     ul > li {
@@ -26,13 +50,33 @@
         list-style: none;
         margin-right: 1rem;
     }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    &.breadcrumbs {
+        ul > li {
+            margin-right: .25rem;
+        }
+    }
+}
+
+.sub-nav-list {
+    min-height: $sub-nav-height;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
 .nav-link {
-    color: $primary-lightest;
     text-decoration: none;
+}
 
-    &:hover {
-        color: $primary-lighter;
-    }
+.nav-logo {
+    font-size: 150%;
+    font-weight: 600;
 }
