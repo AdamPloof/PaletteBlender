@@ -1,0 +1,23 @@
+.content {
+    // TODO: Vary conent width for different screen sizes
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.content-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+
+    &.two-col {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &.three-col {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

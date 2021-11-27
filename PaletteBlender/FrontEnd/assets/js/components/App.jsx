@@ -7,15 +7,16 @@ import SearchBar from './nav/SearchBar';
 import Navbar from './nav/Navbar';
 import SubNav from './nav/SubNav';
 import BreadCrumbNav from './nav/BreadCrumbNav';
+import ContentContainer from './content/ContentContainer';
 
-const useStyles = createUseStyles({
-    content: {
-        width: '100%',
+const useLinkStyle = createUseStyles({
+    linkStd: {
+        color: basePalette.primary[3].color,
+        '&:hover': {color: basePalette.primary[2].color},
     },
 });
 
 function App() {
-    const classes = useStyles();
     document.body.style.backgroundColor = basePalette.greys[8].color;
 
     return (
@@ -24,11 +25,7 @@ function App() {
             <Navbar />
             <SubNav />
             <BreadCrumbNav />
-            <div className={classes.content}>
-                <div className="container">
-                    <h1>Hello Jimbo.</h1>
-                </div>
-            </div>
+            <ContentContainer useLinkStyle={useLinkStyle} />
         </React.Fragment>
     );
 };

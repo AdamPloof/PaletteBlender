@@ -1,6 +1,6 @@
 @import "variables";
 
-* {
+:root {
     box-sizing: border-box;
     line-height: 1.5;
     font-family: $pb-font-stack;
@@ -11,10 +11,10 @@ body {
     margin: 0;
 }
 
-.content {
-    margin: 2rem 4rem;
-}
-
 .container {
     padding: 2rem;
+}
+
+a {
+    text-decoration: none;
 }

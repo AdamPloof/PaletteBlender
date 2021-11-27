@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { basePalette } from '../basePalette';
 import { createUseStyles } from 'react-jss';
 
-const borderStyle = '1px solid ' + basePalette.primary[2].color;
+const borderStyle = '1px solid ' + basePalette.primary[4].color;
 
 const useStyles = createUseStyles({
     navbarSecondary: {
@@ -11,10 +11,14 @@ const useStyles = createUseStyles({
     },
     navLinkSecondary: {
         color: basePalette.primary[6].color,
-        '&:hover': {color: basePalette.primary[5].color},
     },
     navItemSecondary: {
         borderRight: borderStyle,
+        '&:hover': {
+            cursor: 'pointer',
+            backgroundColor: basePalette.primary[4].color,
+            color: basePalette.primary[1].color,
+        }
     },
     navItemActive: {
         "& .nav-link": {
@@ -22,6 +26,10 @@ const useStyles = createUseStyles({
         },
         backgroundColor: basePalette.primary[2].color,
         borderRight: borderStyle,
+        '&:hover': {
+            backgroundColor: basePalette.primary[4].color,
+            color: basePalette.primary[1].color,
+        }
     }
 });
 
