@@ -9,25 +9,31 @@ import SubNav from './nav/SubNav';
 import BreadCrumbNav from './nav/BreadCrumbNav';
 import ContentContainer from './content/ContentContainer';
 
-const useLinkStyle = createUseStyles({
+const bgColor = basePalette.greys[8].color;
+
+const useThemeStyle = createUseStyles({
     linkStd: {
         color: basePalette.primary[3].color,
         '&:hover': {color: basePalette.primary[2].color},
     },
 });
 
-function App() {
-    document.body.style.backgroundColor = basePalette.greys[8].color;
+const ThemeContext = React.createContext({});
 
+function App() {
+    document.body.style.backgroundColor = bgColor;
+    const theme = useThemeStyle();
+    
     return (
-        <React.Fragment>
+        <ThemeContext.Provider value={theme}>
             <SearchBar />
             <Navbar />
             <SubNav />
             <BreadCrumbNav />
-            <ContentContainer useLinkStyle={useLinkStyle} />
-        </React.Fragment>
+            <ContentContainer />
+        </ThemeContext.Provider>
     );
 };
- 
+
+export { ThemeContext, bgColor };
 export default App;
