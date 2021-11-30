@@ -48,3 +48,31 @@
 .btn-container .btn {
     margin-right: 1rem;
 }
+
+.alert {
+    display: flex;
+    flex-direction: column;
+    color: $grey-darkerer;
+    background-color: $grey-lighterer;
+    border: 1px solid $grey-lighter;
+    border-radius: .75rem;
+
+    .alert-header {
+        border-top-right-radius: .75rem;
+        border-top-left-radius: .75rem;
+        border-bottom: 1px solid $grey-lighter;
+        padding: .5rem 1rem;
+        font-size: 110%;
+        font-weight: 600;
+    }
+
+    .alert-body {
+        padding: .5rem 1rem;
+
+        .alert-title {
+            font-size: 125%;
+            font-weight: 500;
+            margin-bottom: .5rem;
+        }
+    }
+}

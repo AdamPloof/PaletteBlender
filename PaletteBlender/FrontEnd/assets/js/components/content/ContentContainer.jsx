@@ -6,6 +6,79 @@ import { ThemeContext } from '../App';
 // TODO: define background color in style context and share it between components that way.
 const bgColor = basePalette.greys[8].color;
 
+const useAlertStyles = createUseStyles({
+    alertPrimary: {
+        color: basePalette.primary[1].color,
+        backgroundColor: basePalette.primary[6].color,
+        borderColor: basePalette.primary[5].color,
+        "& .alert-header": {
+            color: bgColor,
+            backgroundColor: basePalette.primary[2].color,
+            borderBottomColor: basePalette.primary[1].color,
+        }
+    },
+    alertInfo: {
+        color: basePalette.info[1].color,
+        backgroundColor: basePalette.info[6].color,
+        borderColor: basePalette.info[5].color,
+        "& .alert-header": {
+            color: bgColor,
+            backgroundColor: basePalette.info[2].color,
+            borderBottomColor: basePalette.info[1].color,
+        }
+    },
+    alertSuccess: {
+        color: basePalette.success[1].color,
+        backgroundColor: basePalette.success[6].color,
+        borderColor: basePalette.success[5].color,
+        "& .alert-header": {
+            color: bgColor,
+            backgroundColor: basePalette.success[2].color,
+            borderBottomColor: basePalette.success[1].color,
+        }
+    },
+    alertWarning: {
+        color: basePalette.warning[1].color,
+        backgroundColor: basePalette.warning[6].color,
+        borderColor: basePalette.warning[5].color,
+        "& .alert-header": {
+            color: bgColor,
+            backgroundColor: basePalette.warning[2].color,
+            borderBottomColor: basePalette.warning[1].color,
+        }
+    },
+    alertDanger: {
+        color: basePalette.danger[1].color,
+        backgroundColor: basePalette.danger[6].color,
+        borderColor: basePalette.danger[5].color,
+        "& .alert-header": {
+            color: bgColor,
+            backgroundColor: basePalette.danger[2].color,
+            borderBottomColor: basePalette.danger[1].color,
+        }
+    },
+    alertLight: {
+        color: basePalette.greys[1].color,
+        backgroundColor: basePalette.greys[8].color,
+        borderColor: basePalette.greys[7].color,
+        "& .alert-header": {
+            color: basePalette.greys[0].color,
+            backgroundColor: basePalette.greys[5].color,
+            borderBottomColor: basePalette.greys[4].color,
+        }
+    },
+    alertDark: {
+        color: bgColor,
+        backgroundColor: basePalette.greys[2].color,
+        borderColor: basePalette.greys[1].color,
+        "& .alert-header": {
+            color: bgColor,
+            backgroundColor: basePalette.greys[3].color,
+            borderBottomColor: basePalette.greys[2].color,
+        }
+    },
+});
+
 const useStyles = createUseStyles({
     success: {
         color: basePalette.success[2].color,
@@ -223,7 +296,7 @@ const useStyles = createUseStyles({
         },
     },
     btnPaginateDisabled: {
-        color: basePalette.greys[2].color,
+        color: basePalette.greys[3].color,
         backgroundColor: basePalette.primary[5].color,
         borderColor: basePalette.primary[5].color,
         cursor: "default",
@@ -306,14 +379,113 @@ function ButtonSection() {
         </div>
     );
 }
+
+// TODO: make alert factory function. And probably other factory functions while we're at it.
+function AlertSection() {
+    const alertClasses = useAlertStyles();
+    return (
+        <div className="content-section three-col">
+            <div className="col">
+                <div className={"alert " + alertClasses.alertPrimary}>
+                    <div className="alert-header">
+                        Primary Alert
+                    </div>
+                    <div className="alert-body">
+                        <div className="alert-title">
+                            A Very Catchy Title.
+                        </div>
+                        This is a primary message! Lots of important information could go here.
+                    </div>
+                </div>
+            </div>
+            <div className="col">
+                <div className={"alert " + alertClasses.alertInfo}>
+                    <div className="alert-header">
+                        Info Alert
+                    </div>
+                    <div className="alert-body">
+                        <div className="alert-title">
+                            A Very Catchy Title.
+                        </div>
+                        This is an informational message! Lots of important information could go here.
+                    </div>
+                </div>
+            </div>           
+            <div className="col">
+                <div className={"alert " + alertClasses.alertSuccess}>
+                    <div className="alert-header">
+                        Success Alert
+                    </div>
+                    <div className="alert-body">
+                        <div className="alert-title">
+                            A Very Catchy Title.
+                        </div>
+                        This is a successful message! Lots of important information could go here.
+                    </div>
+                </div>
+            </div>
+            <div className="col">
+                <div className={"alert " + alertClasses.alertWarning}>
+                    <div className="alert-header">
+                        Warning Alert
+                    </div>
+                    <div className="alert-body">
+                        <div className="alert-title">
+                            A Very Catchy Title.
+                        </div>
+                        This is a message of warning! Lots of important information could go here.
+                    </div>
+                </div>
+            </div>
+            <div className="col">
+                <div className={"alert " + alertClasses.alertDanger}>
+                    <div className="alert-header">
+                        Danger Alert
+                    </div>
+                    <div className="alert-body">
+                        <div className="alert-title">
+                            A Very Catchy Title.
+                        </div>
+                        This is a dangerous message! Lots of important information could go here.
+                    </div>
+                </div>
+            </div>
+            <div className="col">
+                <div className={"alert " + alertClasses.alertLight}>
+                    <div className="alert-header">
+                        Light Alert
+                    </div>
+                    <div className="alert-body">
+                        <div className="alert-title">
+                            A Very Catchy Title.
+                        </div>
+                        This is a light message! Lots of important information could go here.
+                    </div>
+                </div>
+            </div>
+            <div className="col">
+                <div className={"alert " + alertClasses.alertDark}>
+                    <div className="alert-header">
+                        Dark Alert
+                    </div>
+                    <div className="alert-body">
+                        <div className="alert-title">
+                            A Very Catchy Title.
+                        </div>
+                        This is a dark message! Lots of important information could go here.
+                    </div>
+                </div>
+            </div>           
+        </div>
+    );
+}
  
 function ContentContainer() {
-    const classes = useStyles();
-
     return (
         <div className="content">
             <ParagraphSection />
             <ButtonSection />
+            <AlertSection />
         </div>
     )
 }
