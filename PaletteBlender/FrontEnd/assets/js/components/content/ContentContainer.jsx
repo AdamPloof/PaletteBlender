@@ -14,7 +14,7 @@ const useAlertStyles = createUseStyles({
         "& .alert-header": {
             color: bgColor,
             backgroundColor: basePalette.primary[2].color,
-            borderBottomColor: basePalette.primary[1].color,
+            borderBottomColor: basePalette.primary[5].color,
         }
     },
     alertInfo: {
@@ -24,7 +24,7 @@ const useAlertStyles = createUseStyles({
         "& .alert-header": {
             color: bgColor,
             backgroundColor: basePalette.info[2].color,
-            borderBottomColor: basePalette.info[1].color,
+            borderBottomColor: basePalette.info[5].color,
         }
     },
     alertSuccess: {
@@ -34,7 +34,7 @@ const useAlertStyles = createUseStyles({
         "& .alert-header": {
             color: bgColor,
             backgroundColor: basePalette.success[2].color,
-            borderBottomColor: basePalette.success[1].color,
+            borderBottomColor: basePalette.success[5].color,
         }
     },
     alertWarning: {
@@ -44,7 +44,7 @@ const useAlertStyles = createUseStyles({
         "& .alert-header": {
             color: bgColor,
             backgroundColor: basePalette.warning[2].color,
-            borderBottomColor: basePalette.warning[1].color,
+            borderBottomColor: basePalette.warning[5].color,
         }
     },
     alertDanger: {
@@ -54,7 +54,7 @@ const useAlertStyles = createUseStyles({
         "& .alert-header": {
             color: bgColor,
             backgroundColor: basePalette.danger[2].color,
-            borderBottomColor: basePalette.danger[1].color,
+            borderBottomColor: basePalette.danger[5].color,
         }
     },
     alertLight: {
@@ -70,7 +70,7 @@ const useAlertStyles = createUseStyles({
     alertDark: {
         color: bgColor,
         backgroundColor: basePalette.greys[2].color,
-        borderColor: basePalette.greys[1].color,
+        borderColor: basePalette.greys[4].color,
         "& .alert-header": {
             color: bgColor,
             backgroundColor: basePalette.greys[3].color,
