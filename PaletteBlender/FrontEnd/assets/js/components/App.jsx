@@ -8,6 +8,7 @@ import Navbar from './nav/Navbar';
 import SubNav from './nav/SubNav';
 import BreadCrumbNav from './nav/BreadCrumbNav';
 import ContentContainer from './content/ContentContainer';
+import PaletteEditor from './paletteInterface/PaletteEditor';
 
 const bgColor = basePalette.greys[8].color;
 
@@ -31,6 +32,7 @@ function App() {
             <SubNav />
             <BreadCrumbNav />
             <ContentContainer />
+            <PaletteEditor />
         </ThemeContext.Provider>
     );
 };

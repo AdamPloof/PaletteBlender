@@ -23,6 +23,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
+    "@jaames/iro": "^5.5.2",
     "bootstrap": "^5.1.0",
     "core-js": "^3.16.1",
     "react": "^17.0.2",
