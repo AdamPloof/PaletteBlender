@@ -1,13 +1,15 @@
 @import "variables";
 
-.footer-collapsible {
-    width: 100%
+.footer-container {
+    position: fixed;
+    bottom:0;
+    width: 100%;
+    z-index: 10;
 }
 
 #palette-editor {
     display: flex;
     flex-direction: column;
-    min-height: 240px;
     background-color: $grey-darkerer;
     color: $info-lightest;
 }
@@ -37,20 +39,26 @@
 
 .editor-body {
     flex-grow: 1;
+    height: 0px;
+    transition: height .4s ease-in-out;
+
+    &.expanded {
+        height: 195px;
+    }
 
     .editor-section {
         border-right: 1px solid $grey-dark;
 
         &:nth-of-type(1) {
-            width: 15%;
+            width: 20%;
         }
 
         &:nth-of-type(2) {
-            width: 60%;
+            width: 50%;
         }
 
         &:nth-of-type(3) {
-            width: 25%;
+            width: 30%;
         }
 
         &:last-of-type {
