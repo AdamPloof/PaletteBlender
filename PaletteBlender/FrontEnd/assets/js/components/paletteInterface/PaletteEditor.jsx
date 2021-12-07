@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import iro from '@jaames/iro';
+
+import ColorPicker from './ColorPicker';
 
 function PaletteEditor() {
     const [visibility, setVisibility] = useState('hide');
@@ -61,7 +62,7 @@ function PaletteEditor() {
                     </div>
                     <div className="editor-section">
                         <div className="palette-picker">
-                            <div id="iro-picker"></div>
+                            <ColorPicker />
                         </div>
                     </div>
                 </div>
