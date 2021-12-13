@@ -16,6 +16,17 @@ function PaletteEditor() {
         return bodyClass;
     };
 
+    const getPalettePickerClass = () => {
+        let pickerClass = "palette-picker";
+        if (visibility === 'hide') {
+            pickerClass += ' collapse';
+        } else {
+            pickerClass += ' expanded';
+        }
+
+        return pickerClass;
+    }
+
     const expandPaletteEditor = () => {
         const content = document.getElementsByClassName('content')[0];
 
@@ -61,7 +72,7 @@ function PaletteEditor() {
                         </div>
                     </div>
                     <div className="editor-section">
-                        <div className="palette-picker">
+                        <div className={getPalettePickerClass()}>
                             <ColorPicker 
                                 visibility={visibility}
                             />
