@@ -62,7 +62,9 @@ function PaletteEditor() {
                     </div>
                     <div className="editor-section">
                         <div className="palette-picker">
-                            <ColorPicker />
+                            <ColorPicker 
+                                visibility={visibility}
+                            />
                         </div>
                     </div>
                 </div>

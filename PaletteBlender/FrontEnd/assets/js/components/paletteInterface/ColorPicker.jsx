@@ -20,7 +20,7 @@ class ColorPicker extends Component {
 
     render() { 
         return (
-            <div id="color-picker"></div>
+            <div id="color-picker" className={this.props.visibility == "show" ? "expanded" : "collapse"}></div>
         );
     }
 }

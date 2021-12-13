@@ -1,5 +1,8 @@
 @import "variables";
 
+$editorHeightTransition: height .4s ease-in-out;
+$editorTopTransition: top .4s ease-in-out;
+
 .footer-container {
     position: fixed;
     bottom:0;
@@ -40,7 +43,7 @@
 .editor-body {
     flex-grow: 1;
     height: 0px;
-    transition: height .4s ease-in-out;
+    transition: $editorHeightTransition;
 
     &.expanded {
         height: 195px;
@@ -67,5 +70,15 @@
         &:last-of-type {
             border-right: none;
         }
+    }
+}
+
+#color-picker {
+    position: relative;
+    top: 95px;
+    transition: $editorTopTransition;
+
+    &.expanded {
+        top: 0;
     }
 }
