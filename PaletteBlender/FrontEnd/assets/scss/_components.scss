@@ -1,3 +1,5 @@
+@import "variables";
+
 .content {
     // TODO: Vary conent width for different screen sizes
     max-width: 1320px;
@@ -77,8 +79,234 @@
     }
 
     &:focus {
-        box-shadow: 0 0 0 0.25rem $grey,
+        box-shadow: 0 0 0 0.25rem $grey;
     }
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: $primary-dark;
+    border-color: $primary-dark;
+
+    &:hover {
+        background-color: $primary-darker;
+        border-color: $primary-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $primary;
+    }
+}
+
+.btn-success {
+    color: #fff;
+    background-color: $success-dark;
+    border-color: $success-dark;
+    &:hover {
+        background-color: $success-darker;
+        border-color: $success-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $success;
+    }
+}
+.btn-info {
+    color: #fff;
+    background-color: $info;
+    border-color: $info;
+    &:hover {
+        background-color: $info-dark;
+        border-color: $info-dark;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $info;
+    }
+}
+.btn-warning {
+    color: #fff;
+    background-color: $warning-dark;
+    border-color: $warning-dark;
+    &:hover {
+        background-color: $warning-darker;
+        border-color: $warning-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $warning;
+    }
+}
+.btn-danger {
+    color: #fff;
+    background-color: $danger-dark;
+    border-color: $danger-dark;
+    &:hover {
+        background-color: $danger-darker;
+        border-color: $danger-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $danger;
+    }
+}
+.btn-light {
+    color: $grey-dark;
+    background-color: $grey-lighter;
+    border-color: $grey-lighter;
+    &:hover {
+        background-color: $grey-light;
+        border-color: $grey-light;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $grey;
+    }
+}
+.btn-dark {
+    color: #fff;
+    background-color: $grey-dark;
+    border-color: $grey-dark;
+    &:hover {
+        background-color: $grey-darker;
+        border-color: $grey-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $grey;
+    }
+}
+.btn-outline-primary {
+    color: $primary-dark;
+    background-color: $bg-color;
+    border-color: $primary-dark;
+    &:hover {
+        color: $bg-color;
+        background-color: $primary-darker;
+        border-color: $primary-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $primary;
+    }
+}
+.btn-outline-success {
+    color: $success-dark;
+    background-color: $bg-color;
+    border-color: $success-dark;
+    &:hover {
+        color: $bg-color;
+        background-color: $success-darker;
+        border-color: $success-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $success;
+    }
+}
+.btn-outline-info {
+    color: $info;
+    background-color: $bg-color;
+    border-color: $info;
+    &:hover {
+        color: $bg-color;
+        background-color: $info-dark;
+        border-color: $info-dark;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $info;
+    }
+}
+.btn-outline-warning {
+    color: $warning-dark;
+    background-color: $bg-color;
+    border-color: $warning-dark;
+    &:hover {
+        color: $bg-color;
+        background-color: $warning-darker;
+        border-color: $warning-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $warning;
+    }
+}
+.btn-outline-danger {
+    color: $danger-dark;
+    background-color: $bg-color;
+    border-color: $danger-dark;
+    &:hover {
+        color: $bg-color;
+        background-color: $danger-darker;
+        border-color: $danger-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $danger;
+    }
+}
+.btn-outline-light {
+    color: $grey;
+    background-color: $bg-color;
+    border-color: $grey-lighter;
+    &:hover {
+        color: $bg-color;
+        background-color: $grey-light;
+        border-color: $grey-light;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $grey;
+    }
+}
+.btn-outline-dark {
+    color: $grey-dark;
+    background-color: $bg-color;
+    border-color: $grey-dark;
+    &:hover {
+        color: $bg-color;
+        background-color: $grey-darker;
+        border-color: $grey-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $grey;
+    }
+}
+.btn-paginate {
+    color: $bg-color;
+    background-color: $primary;
+    border-color: $primary;
+    &:hover {
+        background-color: $primary-dark;
+        border-color: $primary-dark;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $primary-light;
+    }
+}
+.btn-paginate-active {
+    color: $bg-color;
+    background-color: $primary-dark;
+    border-color: $primary-dark;
+    
+    &:hover {
+        color: $bg-color;
+        background-color: $primary-darker;
+        border-color: $primary-darker;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 0.25rem $primary;
+    }
+}
+.btn-paginate-disabled {
+    color: $grey;
+    background-color: $primary-lighter;
+    border-color: $primary-lighter;
+    cursor: default;
 }
 
 .alert {
@@ -107,4 +335,28 @@
             margin-bottom: .5rem;
         }
     }
+}
+
+/** Forms */
+select {
+	display: block;
+	width: 100%;
+	padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+	-moz-padding-start: calc(0.75rem - 3px);
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #303030;
+	background-color: #fff;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+	background-repeat: no-repeat;
+	background-position: right 0.75rem center;
+	background-size: 16px 12px;
+	border: 1px solid #222;
+	border-radius: 0.25rem;
+	transition: border-color 0.15s ease-in-out box-shadow 0.15s ease-in-out;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+    word-wrap: normal;
 }

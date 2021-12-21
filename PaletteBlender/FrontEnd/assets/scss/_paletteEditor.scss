@@ -28,6 +28,7 @@ $editorTopTransition: top .4s ease-in-out;
     padding: .5rem 2rem;
     background-color: $grey-darker;
     border-bottom: 1px solid $grey-dark;
+    color: $info-lighter;
 
     & > * {
         display: flex;
@@ -73,13 +74,51 @@ $editorTopTransition: top .4s ease-in-out;
     }
 }
 
-.palette-picker {
+.palette-picker,
+.palette-selector {
+    overflow: hidden;
     width: 100%;
     height: 0px;
     transition: $editorHeightTransition;
 
+    .section-options {
+        margin-top: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2rem;
+    }
+
     &.expanded {
         height: 170px;
+    }
+}
+
+.palette-selector {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .selector-input {
+        position: relative;
+        top: 120px;
+        transition: $editorTopTransition;
+
+        label {
+            display: flex;
+            margin-bottom: .5rem;
+        }
+    }
+
+    &.expanded {
+        height: 170px;
+        
+        .selector-input {
+            top: 0;
+        }
     }
 }
 

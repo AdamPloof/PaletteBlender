@@ -2,6 +2,35 @@ import React, { useState } from 'react';
 
 import ColorPicker from './ColorPicker';
 
+function SubPaletteSelector(props) {
+    const getPaletteSelectorClass = () => {
+        let pickerClass = "palette-selector";
+        if (props.visibility === 'hide') {
+            pickerClass += ' collapse';
+        } else {
+            pickerClass += ' expanded';
+        }
+
+        return pickerClass;
+    }
+
+    return (
+        <div className={getPaletteSelectorClass()}>
+            <div className="selector-input">
+                <label htmlFor="palette-select">Select Sub-Palette</label>
+                <select name="palette-select" id="palette-select">
+                    <option value="test1">Primary</option>
+                    <option value="test2">Secondary</option>
+                </select>
+                <div className="section-options">
+                    <div className="btn btn-info">View CSS</div>
+                    <div className="btn btn-light">Reset</div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 function PaletteEditor() {
     const [visibility, setVisibility] = useState('hide');
 
@@ -62,9 +91,9 @@ function PaletteEditor() {
                 </div>
                 <div className={getBodyClass()}>
                     <div className="editor-section">
-                        <div className="palette-selector">
-
-                        </div>
+                        <SubPaletteSelector 
+                            visibility={visibility} 
+                        />
                     </div>
                     <div className="editor-section">
                         <div className="palette-viewer">
