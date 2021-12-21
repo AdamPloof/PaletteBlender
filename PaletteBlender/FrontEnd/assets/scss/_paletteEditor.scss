@@ -122,6 +122,78 @@ $editorTopTransition: top .4s ease-in-out;
     }
 }
 
+.palette-viewer {
+    display: flex;
+    flex-direction: column;
+    height: 0px;
+    transition: $editorHeightTransition;
+
+    &.expanded {
+        height: 170px;
+    }
+
+    .viewer-section-top,
+    .viewer-section-bottom {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .viewer-section-top {
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .selection-info {
+        display: flex;
+        flex-direction: row;
+
+        .selection-info-item {
+            margin-right: 1rem;
+
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+    }
+    
+    .color-info {
+        display: flex;
+        flex-direction: column;
+        
+        .color-info-title {
+            margin: 0;
+        }
+        
+        .color-info-label {
+            color: $info-lighter;
+        }
+    }
+
+    .color-options {
+        display: flex;
+        align-items: flex-end;
+    }
+
+    // TODO: Make sure the color grid wraps properly on slightly smaller screens. May need to use grid layout instead of flexbox.
+    .color-grid {
+        display: flex;
+    }
+
+    .viewer-section-top,
+    .color-grid {
+        flex-direction: row;
+    }
+
+    .color-grid {
+        border: 1px solid $grey-dark;
+    }
+
+    .color-grid-item {
+        height: 80px;
+        width: 80px;
+    }
+}
+
 .color-picker-widget {
     display: flex;
     flex-direction: row;
@@ -146,7 +218,8 @@ $editorTopTransition: top .4s ease-in-out;
         margin-right: auto;
     }
 
-    .color-value-label {
+    .color-value-label,
+    .color-info-label {
         color: $info-lighter;
     }
 }

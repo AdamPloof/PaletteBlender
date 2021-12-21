@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { basePalette } from '../basePalette';
 
 import ColorPicker from './ColorPicker';
 
-function SubPaletteSelector(props) {
+function SubPaletteSelector(props) {    
     const getPaletteSelectorClass = () => {
         let pickerClass = "palette-selector";
         if (props.visibility === 'hide') {
@@ -31,8 +32,61 @@ function SubPaletteSelector(props) {
     );
 }
 
+function PaletteViewer(props) {
+    const makeColorGrid = () => {
+        return props.selectedSubPalette.map(color => (
+            <div key={color.name} className="color-grid-item" style={{backgroundColor: color.color}}>
+                {/* {color.name} */}
+            </div>
+        ));
+    };
+
+    const getPaletteViewerClass = () => {
+        let pickerClass = "palette-viewer";
+        if (props.visibility === 'hide') {
+            pickerClass += ' collapse';
+        } else {
+            pickerClass += ' expanded';
+        }
+
+        return pickerClass;
+    };
+
+    return (
+        <div className={getPaletteViewerClass()}>
+            <div className="viewer-section-top">
+                <div className="color-info">
+                    <div className="info-title">
+                        <h2 className='color-info-title'>Primary</h2>
+
+                    </div>
+                    <div className="selection-info">
+                        <div className="selection-info-item">
+                            <strong className='color-info-label'>Selected color: </strong> primary-dark
+                        </div>
+                        <div className="selection-info-item">
+                            <strong className="color-info-label">HEX: </strong> #a3af3a
+                        </div>
+                    </div>
+                </div>
+                <div className="color-options">
+                    {/* <div className="btn-btn-info"></div> */}
+                    <div className="btn btn-outline-info">Reset Color</div>
+                </div>
+
+            </div>
+            <div className="view-section-bottom">
+                <div className="color-grid">
+                    {makeColorGrid()}
+                </div>
+            </div>
+        </div>
+    );
+}
+
 function PaletteEditor() {
     const [visibility, setVisibility] = useState('hide');
+    const [selectedSubPalette, setSelectedSubPalette] = useState(basePalette.primary);
 
     const getBodyClass = () => {
         let bodyClass = "editor-body";
@@ -80,6 +134,7 @@ function PaletteEditor() {
                         </div>
                     </div>
                     <div className="header-right">
+                        {/* TODO: Change arrow on hide button to up arrow when it's a "show" button */}
                         <div 
                             className="btn btn-sm btn-editor-control"
                             tabIndex="1"
@@ -92,13 +147,16 @@ function PaletteEditor() {
                 <div className={getBodyClass()}>
                     <div className="editor-section">
                         <SubPaletteSelector 
-                            visibility={visibility} 
+                            visibility={visibility}
+                            setSelectedSubPalette={setSelectedSubPalette}
+                            selectedSubPalette={setSelectedSubPalette}
                         />
                     </div>
                     <div className="editor-section">
-                        <div className="palette-viewer">
-
-                        </div>
+                        <PaletteViewer
+                            visibility={visibility}
+                            selectedSubPalette={selectedSubPalette}
+                        />
                     </div>
                     <div className="editor-section">
                         <div className={getPalettePickerClass()}>

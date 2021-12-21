@@ -178,7 +178,7 @@
 }
 .btn-outline-primary {
     color: $primary-dark;
-    background-color: $bg-color;
+    background-color: unset;
     border-color: $primary-dark;
     &:hover {
         color: $bg-color;
@@ -192,7 +192,7 @@
 }
 .btn-outline-success {
     color: $success-dark;
-    background-color: $bg-color;
+    background-color: unset;
     border-color: $success-dark;
     &:hover {
         color: $bg-color;
@@ -206,7 +206,7 @@
 }
 .btn-outline-info {
     color: $info;
-    background-color: $bg-color;
+    background-color: unset;
     border-color: $info;
     &:hover {
         color: $bg-color;
@@ -220,7 +220,7 @@
 }
 .btn-outline-warning {
     color: $warning-dark;
-    background-color: $bg-color;
+    background-color: unset;
     border-color: $warning-dark;
     &:hover {
         color: $bg-color;
@@ -234,7 +234,7 @@
 }
 .btn-outline-danger {
     color: $danger-dark;
-    background-color: $bg-color;
+    background-color: unset;
     border-color: $danger-dark;
     &:hover {
         color: $bg-color;
@@ -248,7 +248,7 @@
 }
 .btn-outline-light {
     color: $grey;
-    background-color: $bg-color;
+    background-color: unset;
     border-color: $grey-lighter;
     &:hover {
         color: $bg-color;
@@ -262,7 +262,7 @@
 }
 .btn-outline-dark {
     color: $grey-dark;
-    background-color: $bg-color;
+    background-color: unset;
     border-color: $grey-dark;
     &:hover {
         color: $bg-color;
