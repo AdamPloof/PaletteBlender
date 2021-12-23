@@ -172,6 +172,18 @@ $editorTopTransition: top .4s ease-in-out;
     .color-options {
         display: flex;
         align-items: flex-end;
+
+        .btn {
+            margin-right: .5rem;
+
+            &:last-of-type {
+                margin-right: 0;
+            }
+
+            i {
+                display: flex;
+            }
+        }
     }
 
     // TODO: Make sure the color grid wraps properly on slightly smaller screens. May need to use grid layout instead of flexbox.
@@ -184,13 +196,43 @@ $editorTopTransition: top .4s ease-in-out;
         flex-direction: row;
     }
 
-    .color-grid {
-        border: 1px solid $grey-dark;
-    }
-
+    $color-grid-border: 1px solid $grey-dark;
+    $color-grid-border-hover: 2px solid $grey;
+    $color-grid-border-selected: 2px solid $grey-lightest;
     .color-grid-item {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        border-top: $color-grid-border;
+        border-bottom: $color-grid-border;
         height: 80px;
         width: 80px;
+
+        i {
+            margin-right: .2rem;
+            margin-bottom: .2rem;
+            color: $grey-lightest;
+        }
+
+        &.grid-item-light i {
+            color: $grey-darkest;
+        }
+
+        &:first-of-type {
+            border-left: $color-grid-border;
+        }
+
+        &:last-of-type {
+            border-right: $color-grid-border;
+        }
+
+        &:hover {
+            border: $color-grid-border-hover;
+        }
+
+        &.selected {
+            border: $color-grid-border-selected;
+        }
     }
 }
 

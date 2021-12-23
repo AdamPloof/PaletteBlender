@@ -33,10 +33,47 @@ function SubPaletteSelector(props) {
 }
 
 function PaletteViewer(props) {
+    const [selectedColor, setSelectedColor] = useState(null);
+    const [lockedColors, setLockedColors] = useState([]);
+
+    const getLockIcon = (color) => {
+        let lockIcon = null;
+        if (lockedColors.includes(color)) {
+            lockIcon = (
+                <i className='material-icon-outline'>lock</i>
+            );
+        }
+
+        return lockIcon;
+    };
+
+    const getGridItemClass = (color) => {
+        let gridItemClass = 'color-grid-item';
+        if (color == selectedColor) {
+            gridItemClass += ' selected';
+        }
+
+        if (color.includes('Light')) {
+            gridItemClass += ' grid-item-light';
+        }
+
+        return gridItemClass;
+    };
+
     const makeColorGrid = () => {
         return props.selectedSubPalette.map(color => (
-            <div key={color.name} className="color-grid-item" style={{backgroundColor: color.color}}>
+            <div 
+                key={color.name}
+                id={'grid_' + color.name}
+                className={getGridItemClass(color.name)}
+                style={{backgroundColor: color.color}}
+                onClick={(e) => {
+                    const color = e.target.id.replace('grid_', '');
+                    setSelectedColor(color);
+                }}
+            >
                 {/* {color.name} */}
+                {getLockIcon(color.name)}
             </div>
         ));
     };
@@ -52,6 +89,14 @@ function PaletteViewer(props) {
         return pickerClass;
     };
 
+    const addLockedColor = () => {
+        setLockedColors([...lockedColors, selectedColor]);
+    };
+
+    const removeLockedColor = () => {
+        setLockedColors(lockedColors.filter(color => color != selectedColor));
+    };
+
     return (
         <div className={getPaletteViewerClass()}>
             <div className="viewer-section-top">
@@ -62,15 +107,27 @@ function PaletteViewer(props) {
                     </div>
                     <div className="selection-info">
                         <div className="selection-info-item">
-                            <strong className='color-info-label'>Selected color: </strong> primary-dark
-                        </div>
-                        <div className="selection-info-item">
-                            <strong className="color-info-label">HEX: </strong> #a3af3a
+                            <strong className='color-info-label'>Selected: </strong> primary-dark
                         </div>
                     </div>
                 </div>
                 <div className="color-options">
                     {/* <div className="btn-btn-info"></div> */}
+                    <div 
+                        className="btn btn-outline-light"
+                        onClick={() => {
+                            if (!selectedColor) {
+                                return;
+                            } else if (lockedColors.includes(selectedColor)) {
+                                removeLockedColor(selectedColor);
+                            } else {
+                                addLockedColor(selectedColor);
+                            }
+                        }}
+                    >
+                        <i className='material-icon-outline'>{lockedColors.includes(selectedColor) ? 'lock' : 'lock_open'}</i>
+                    </div>
+                    <div className="btn btn-outline-info">Fill Shades</div>
                     <div className="btn btn-outline-info">Reset Color</div>
                 </div>
 
