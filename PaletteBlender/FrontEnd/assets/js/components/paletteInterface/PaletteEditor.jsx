@@ -8,6 +8,27 @@ function capitalizeWord(word) {
     return word.charAt(0).toLocaleUpperCase() + word.slice(1);
 }
 
+function formatColorNameForCss(colorName) {
+    if (!colorName) {
+        return null;
+    }
+
+    let colorNameCenter = colorName.indexOf('Light');
+    if (colorNameCenter === -1) {
+        colorNameCenter = colorName.indexOf('Dark');
+    }
+
+    let cssColorName;
+    if (colorNameCenter === -1) {
+        cssColorName = colorName;
+    } else {
+        cssColorName = colorName.slice(0, colorNameCenter) + "-" + colorName.slice(colorNameCenter);
+        console.log(colorNameCenter);
+    }
+
+    return cssColorName.toLowerCase();
+}
+
 function SubPaletteSelector(props) {
     // TODO: On change, unset any selected color
     const getPaletteSelectorClass = () => {
@@ -64,8 +85,6 @@ function SubPaletteSelector(props) {
 }
 
 function PaletteViewer(props) {
-    const [ selectedColor, setSelectedColor ] = useState(null);
-    const [ lockedColors, setLockedColors ] = useState([]);
     const [ colorPalette, setColorPalette ] = useContext(PaletteContext);
 
     const getLockIcon = (color) => {
@@ -118,7 +137,6 @@ function PaletteViewer(props) {
                     setColorPalette(updatedPalette);
                 }}
             >
-                {/* {color.name} */}
                 {getLockIcon(color)}
             </div>
         ));
@@ -135,14 +153,38 @@ function PaletteViewer(props) {
         return pickerClass;
     };
 
-    const addLockedColor = () => {
-        setLockedColors([...lockedColors, selectedColor]);
+    const toggleColorLock = () => {
+        const subPalette = colorPalette[props.selectedPaletteName].map(colorObj => {
+            if (colorObj.selected === true) {
+                colorObj.locked = colorObj.locked === false;
+            }
+            
+            return colorObj;
+        });
+        
+        const updatedPalette = {...colorPalette};
+        updatedPalette[props.selectedPaletteName] = subPalette;
+        setColorPalette(updatedPalette);
+    };
+    
+    const selectedColor = colorPalette[props.selectedPaletteName].find(colorObj => colorObj.selected === true);
+
+    const getLockBtnIcon = () => {
+        if (!selectedColor) {
+            return 'lock_open';
+        }
+
+        return selectedColor.locked ? 'lock' : 'lock_open'
     };
 
-    const removeLockedColor = () => {
-        setLockedColors(lockedColors.filter(color => color != selectedColor));
-    };
+    const getSelectedColorName = () => {
+        if (!selectedColor) {
+            return null;
+        }
 
+        return formatColorNameForCss(selectedColor.name);
+    }
+    
     return (
         <div className={getPaletteViewerClass()}>
             <div className="viewer-section-top">
@@ -153,7 +195,7 @@ function PaletteViewer(props) {
                     </div>
                     <div className="selection-info">
                         <div className="selection-info-item">
-                            <strong className='color-info-label'>Selected: </strong> primary-dark
+                            <strong className='color-info-label'>Selected: </strong> {getSelectedColorName()}
                         </div>
                     </div>
                 </div>
@@ -164,14 +206,12 @@ function PaletteViewer(props) {
                         onClick={() => {
                             if (!selectedColor) {
                                 return;
-                            } else if (lockedColors.includes(selectedColor)) {
-                                removeLockedColor(selectedColor);
                             } else {
-                                addLockedColor(selectedColor);
+                                toggleColorLock();
                             }
                         }}
                     >
-                        <i className='material-icon-outline'>{lockedColors.includes(selectedColor) ? 'lock' : 'lock_open'}</i>
+                        <i className='material-icon-outline'>{getLockBtnIcon()}</i>
                     </div>
                     <div className="btn btn-outline-info">Fill Shades</div>
                     <div className="btn btn-outline-info">Reset Color</div>
