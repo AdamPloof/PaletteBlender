@@ -9,6 +9,7 @@ function capitalizeWord(word) {
 }
 
 function SubPaletteSelector(props) {
+    // TODO: On change, unset any selected color
     const getPaletteSelectorClass = () => {
         let pickerClass = "palette-selector";
         if (props.visibility === 'hide') {
@@ -48,7 +49,6 @@ function SubPaletteSelector(props) {
                     value={props.selectedSubPalette}
                     onChange={(e) => {
                         const selectedPaletteName = e.target.value;
-                        props.setSelectedSubPalette([...props.colorPalette[selectedPaletteName]]);
                         props.setSelectedPaletteName(selectedPaletteName);
                     }}
                 >
@@ -64,12 +64,13 @@ function SubPaletteSelector(props) {
 }
 
 function PaletteViewer(props) {
-    const [selectedColor, setSelectedColor] = useState(null);
-    const [lockedColors, setLockedColors] = useState([]);
+    const [ selectedColor, setSelectedColor ] = useState(null);
+    const [ lockedColors, setLockedColors ] = useState([]);
+    const [ colorPalette, setColorPalette ] = useContext(PaletteContext);
 
     const getLockIcon = (color) => {
         let lockIcon = null;
-        if (lockedColors.includes(color)) {
+        if (color.locked === true) {
             lockIcon = (
                 <i className='material-icon-outline'>lock</i>
             );
@@ -80,11 +81,11 @@ function PaletteViewer(props) {
 
     const getGridItemClass = (color) => {
         let gridItemClass = 'color-grid-item';
-        if (color == selectedColor) {
+        if (color.selected === true) {
             gridItemClass += ' selected';
         }
 
-        if (color.includes('Light')) {
+        if (color.name.includes('Light')) {
             gridItemClass += ' grid-item-light';
         }
 
@@ -92,19 +93,33 @@ function PaletteViewer(props) {
     };
 
     const makeColorGrid = () => {
-        return props.selectedSubPalette.map(color => (
+        return colorPalette[props.selectedPaletteName].map(color => (
             <div 
                 key={color.name}
                 id={'grid_' + color.name}
-                className={getGridItemClass(color.name)}
+                className={getGridItemClass(color)}
                 style={{backgroundColor: color.color}}
                 onClick={(e) => {
                     const color = e.target.id.replace('grid_', '');
-                    setSelectedColor(color);
+
+                    // Toggle Selected state
+                    const subPalette = colorPalette[props.selectedPaletteName].map(colorObj => {
+                        if (colorObj.name === color) {
+                            colorObj.selected = true;
+                        } else {
+                            colorObj.selected = false;
+                        }
+
+                        return colorObj;
+                    });
+
+                    const updatedPalette = {...colorPalette};
+                    updatedPalette[props.selectedPaletteName] = subPalette;
+                    setColorPalette(updatedPalette);
                 }}
             >
                 {/* {color.name} */}
-                {getLockIcon(color.name)}
+                {getLockIcon(color)}
             </div>
         ));
     };
@@ -175,7 +190,6 @@ function PaletteViewer(props) {
 function PaletteEditor() {
     const [ visibility, setVisibility ] = useState('hide');
     const [ colorPalette, setColorPalette ] = useContext(PaletteContext);
-    const [ selectedSubPalette, setSelectedSubPalette ] = useState(colorPalette.primary);
 
     const subPaletteNames = Object.keys(colorPalette);
     const [ selectedPaletteName, setSelectedPaletteName ] = useState(subPaletteNames[0]);
@@ -240,7 +254,6 @@ function PaletteEditor() {
                     <div className="editor-section">
                         <SubPaletteSelector 
                             visibility={visibility}
-                            setSelectedSubPalette={setSelectedSubPalette}
                             subPaletteNames={subPaletteNames}
                             selectedPaletteName={selectedPaletteName}
                             setSelectedPaletteName={setSelectedPaletteName}
@@ -251,7 +264,6 @@ function PaletteEditor() {
                         <PaletteViewer
                             visibility={visibility}
                             selectedPaletteName={selectedPaletteName}
-                            selectedSubPalette={selectedSubPalette}
                         />
                     </div>
                     <div className="editor-section">
