@@ -1,7 +1,6 @@
 import React, { Component, useContext } from 'react';
 import { createUseStyles } from 'react-jss';
 import { basePalette } from '../basePalette';
-import { ThemeContext } from '../App';
 
 // TODO: define background color in style context and share it between components that way.
 const bgColor = basePalette.greys[8].color;
@@ -303,8 +302,15 @@ const useStyles = createUseStyles({
     },
 });
 
+const useLinkStyles = createUseStyles({
+    linkStd: {
+        color: basePalette.primary[3].color,
+        '&:hover': {color: basePalette.primary[2].color},
+    },
+});
+
 function ParagraphSection() {
-    const theme = useContext(ThemeContext);
+    const linkClasses = useLinkStyles();
     const classes = useStyles();
 
     return (
@@ -313,7 +319,7 @@ function ParagraphSection() {
                 <h1>A Story for Reading</h1>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                    <a href="#" className={theme.linkStd}> Link: Quisque dictum</a> neque in magna laoreet molestie. Quisque ut orci elit. 
+                    <a href="#" className={linkClasses.linkStd}> Link: Quisque dictum</a> neque in magna laoreet molestie. Quisque ut orci elit. 
                     Quisque posuere ligula quis sapien ultrices, eget auctor 
                     dolor lobortis. 
                     <br/>
@@ -321,7 +327,7 @@ function ParagraphSection() {
                 </p>
                 <p>
                     Aenean et ante dui. Nullam sed quam nisi. Vestibulum felis neque, 
-                    tincidunt maximus <a href="#" className={theme.linkStd}>Link: malesuada vitae</a>, mollis quis felis. In orci enim, pharetra 
+                    tincidunt maximus <a href="#" className={linkClasses.linkStd}>Link: malesuada vitae</a>, mollis quis felis. In orci enim, pharetra 
                     ut arcu et, posuere consequat ante. 
                 </p>
             </div>

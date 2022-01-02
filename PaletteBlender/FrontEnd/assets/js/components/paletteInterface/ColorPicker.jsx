@@ -15,7 +15,6 @@ class ColorPicker extends Component {
     }
 
     componentDidMount() {
-        const { props } = this;
         this.colorPicker = new iro.ColorPicker(document.getElementById('color-picker'), {
             // Setting initial color to white for now, should probably set it to whatever primary is though
             color: "#fff",

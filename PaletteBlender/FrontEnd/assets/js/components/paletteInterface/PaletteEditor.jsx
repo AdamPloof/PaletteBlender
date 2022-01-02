@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { basePalette } from '../basePalette';
 
+import { PaletteContext } from '../PaletteContext';
 import ColorPicker from './ColorPicker';
 
-function SubPaletteSelector(props) {    
+function capitalizeWord(word) {
+    return word.charAt(0).toLocaleUpperCase() + word.slice(1);
+}
+
+function SubPaletteSelector(props) {
     const getPaletteSelectorClass = () => {
         let pickerClass = "palette-selector";
         if (props.visibility === 'hide') {
@@ -15,13 +20,39 @@ function SubPaletteSelector(props) {
         return pickerClass;
     }
 
+    const getColorOptions = () => {
+        return (
+            <React.Fragment>
+                {props.subPaletteNames.map(paletteName => {
+                    // Capitalize the first letter of the sub palette name
+                    const paletteTitle = capitalizeWord(paletteName);
+
+                    return (
+                        <option key={paletteName} value={paletteName}>
+                            {paletteTitle}
+                        </option>
+                    );
+                })}
+            </React.Fragment>
+        );
+
+    }
+
     return (
         <div className={getPaletteSelectorClass()}>
             <div className="selector-input">
                 <label htmlFor="palette-select">Select Sub-Palette</label>
-                <select name="palette-select" id="palette-select">
-                    <option value="test1">Primary</option>
-                    <option value="test2">Secondary</option>
+                <select 
+                    name="palette-select"
+                    id="palette-select"
+                    value={props.selectedSubPalette}
+                    onChange={(e) => {
+                        const selectedPaletteName = e.target.value;
+                        props.setSelectedSubPalette([...props.colorPalette[selectedPaletteName]]);
+                        props.setSelectedPaletteName(selectedPaletteName);
+                    }}
+                >
+                    {getColorOptions()}
                 </select>
                 <div className="section-options">
                     <div className="btn btn-info">View CSS</div>
@@ -102,7 +133,7 @@ function PaletteViewer(props) {
             <div className="viewer-section-top">
                 <div className="color-info">
                     <div className="info-title">
-                        <h2 className='color-info-title'>Primary</h2>
+                        <h2 className='color-info-title'>{capitalizeWord(props.selectedPaletteName)}</h2>
 
                     </div>
                     <div className="selection-info">
@@ -142,8 +173,12 @@ function PaletteViewer(props) {
 }
 
 function PaletteEditor() {
-    const [visibility, setVisibility] = useState('hide');
-    const [selectedSubPalette, setSelectedSubPalette] = useState(basePalette.primary);
+    const [ visibility, setVisibility ] = useState('hide');
+    const [ colorPalette, setColorPalette ] = useContext(PaletteContext);
+    const [ selectedSubPalette, setSelectedSubPalette ] = useState(colorPalette.primary);
+
+    const subPaletteNames = Object.keys(colorPalette);
+    const [ selectedPaletteName, setSelectedPaletteName ] = useState(subPaletteNames[0]);
 
     const getBodyClass = () => {
         let bodyClass = "editor-body";
@@ -206,12 +241,16 @@ function PaletteEditor() {
                         <SubPaletteSelector 
                             visibility={visibility}
                             setSelectedSubPalette={setSelectedSubPalette}
-                            selectedSubPalette={setSelectedSubPalette}
+                            subPaletteNames={subPaletteNames}
+                            selectedPaletteName={selectedPaletteName}
+                            setSelectedPaletteName={setSelectedPaletteName}
+                            colorPalette={colorPalette}
                         />
                     </div>
                     <div className="editor-section">
                         <PaletteViewer
                             visibility={visibility}
+                            selectedPaletteName={selectedPaletteName}
                             selectedSubPalette={selectedSubPalette}
                         />
                     </div>
