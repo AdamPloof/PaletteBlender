@@ -17,7 +17,7 @@ class ColorPicker extends Component {
     componentDidMount() {
         this.colorPicker = new iro.ColorPicker(document.getElementById('color-picker'), {
             // Setting initial color to white for now, should probably set it to whatever primary is though
-            color: this.props.selectedColor,
+            color: this.props.selectedColor.color,
             width: 130,
             borderColor: basePalette.greys[4].color
         }); 
@@ -25,11 +25,30 @@ class ColorPicker extends Component {
         this.colorPicker.on(['color:init', 'color:change'], (color) => {
             this.updateColor(color);
         });
+
+        // NOTE: if color updating is slow or clunky on input:change we can try input:end to reduce the amount of updates.
+        this.colorPicker.on('input:change', (color) => {
+            if (this.props.selectedColor.locked === true) {
+                return;
+            }
+            
+            const subPalette = this.props.colorPalette[this.props.selectedPaletteName].map(colorObj => {
+                if (colorObj.name === this.props.selectedColor.name) {
+                    colorObj.color = color.hexString;
+                }
+
+                return colorObj;
+            });
+
+            const updatedPalette = {...this.props.colorPalette};
+            updatedPalette[this.props.selectedPaletteName] = subPalette;
+            this.props.setColorPalette(updatedPalette);
+        });
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.selectedColor !== prevProps.selectedColor) {
-            this.colorPicker.color.hexString = this.props.selectedColor;
+        if (this.props.selectedColor.name !== prevProps.selectedColor.name) {
+            this.colorPicker.color.hexString = this.props.selectedColor.color;
         }
     }
 

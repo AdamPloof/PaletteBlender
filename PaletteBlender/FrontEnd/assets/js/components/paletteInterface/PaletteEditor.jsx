@@ -4,7 +4,12 @@ import { basePalette } from '../basePalette';
 import { PaletteContext } from '../PaletteContext';
 import ColorPicker from './ColorPicker';
 
-const COLOR_WHITE = '#fff';
+const DEFAULT_COLOR = {
+    name: null,
+    color: '#fff',
+    locked: false,
+    selected: false,
+};
 
 function capitalizeWord(word) {
     return word.charAt(0).toLocaleUpperCase() + word.slice(1);
@@ -127,10 +132,10 @@ function PaletteViewer(props) {
                             // Deselect color if it's already selected
                             if (colorObj.selected === true) {
                                 colorObj.selected = false;
-                                props.setSelectedColor(COLOR_WHITE);
+                                props.setSelectedColor(DEFAULT_COLOR);
                             } else {
                                 colorObj.selected = true;
-                                props.setSelectedColor(colorObj.color);
+                                props.setSelectedColor({...colorObj});
                             }
                         } else {
                             colorObj.selected = false;
@@ -164,6 +169,9 @@ function PaletteViewer(props) {
         const subPalette = colorPalette[props.selectedPaletteName].map(colorObj => {
             if (colorObj.selected === true) {
                 colorObj.locked = colorObj.locked === false;
+
+                // Reset selected color so that changes to the locked status get passed on to the color picker
+                props.setSelectedColor({...colorObj})
             }
             
             return colorObj;
@@ -240,11 +248,11 @@ function PaletteEditor() {
 
     const subPaletteNames = Object.keys(colorPalette);
     const [ selectedPaletteName, setSelectedPaletteName ] = useState(subPaletteNames[0]);
-    const [selectedColor, setSelectedColor] = useState(COLOR_WHITE);
+    const [ selectedColor, setSelectedColor ] = useState(DEFAULT_COLOR);
 
     useEffect(() => {
         deselectAllColors();
-        setSelectedColor(COLOR_WHITE);
+        setSelectedColor(DEFAULT_COLOR);
     }, [selectedPaletteName]);
 
     const deselectAllColors = () => {
@@ -337,6 +345,9 @@ function PaletteEditor() {
                             <ColorPicker 
                                 visibility={visibility}
                                 selectedColor={selectedColor}
+                                selectedPaletteName={selectedPaletteName}
+                                colorPalette={colorPalette}
+                                setColorPalette={setColorPalette}
                             />
                         </div>
                     </div>
