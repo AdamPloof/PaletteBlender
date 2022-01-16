@@ -1,8 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { basePalette } from '../basePalette';
 
 import { PaletteContext } from '../PaletteContext';
 import ColorPicker from './ColorPicker';
+
+const COLOR_WHITE = '#fff';
 
 function capitalizeWord(word) {
     return word.charAt(0).toLocaleUpperCase() + word.slice(1);
@@ -23,14 +25,12 @@ function formatColorNameForCss(colorName) {
         cssColorName = colorName;
     } else {
         cssColorName = colorName.slice(0, colorNameCenter) + "-" + colorName.slice(colorNameCenter);
-        console.log(colorNameCenter);
     }
 
     return cssColorName.toLowerCase();
 }
 
 function SubPaletteSelector(props) {
-    // TODO: On change, unset any selected color
     const getPaletteSelectorClass = () => {
         let pickerClass = "palette-selector";
         if (props.visibility === 'hide') {
@@ -124,7 +124,14 @@ function PaletteViewer(props) {
                     // Toggle Selected state
                     const subPalette = colorPalette[props.selectedPaletteName].map(colorObj => {
                         if (colorObj.name === color) {
-                            colorObj.selected = true;
+                            // Deselect color if it's already selected
+                            if (colorObj.selected === true) {
+                                colorObj.selected = false;
+                                props.setSelectedColor(COLOR_WHITE);
+                            } else {
+                                colorObj.selected = true;
+                                props.setSelectedColor(colorObj.color);
+                            }
                         } else {
                             colorObj.selected = false;
                         }
@@ -233,6 +240,24 @@ function PaletteEditor() {
 
     const subPaletteNames = Object.keys(colorPalette);
     const [ selectedPaletteName, setSelectedPaletteName ] = useState(subPaletteNames[0]);
+    const [selectedColor, setSelectedColor] = useState(COLOR_WHITE);
+
+    useEffect(() => {
+        deselectAllColors();
+        setSelectedColor(COLOR_WHITE);
+    }, [selectedPaletteName]);
+
+    const deselectAllColors = () => {
+        let updatedPalette = {};
+        for (const [key, val] of Object.entries(colorPalette)) {
+            updatedPalette[key] = val.map(color => {
+                color.selected = false;
+                return color;
+            });
+        }
+
+        setColorPalette(updatedPalette);
+    };
 
     const getBodyClass = () => {
         let bodyClass = "editor-body";
@@ -304,12 +329,14 @@ function PaletteEditor() {
                         <PaletteViewer
                             visibility={visibility}
                             selectedPaletteName={selectedPaletteName}
+                            setSelectedColor={setSelectedColor}
                         />
                     </div>
                     <div className="editor-section">
                         <div className={getPalettePickerClass()}>
                             <ColorPicker 
                                 visibility={visibility}
+                                selectedColor={selectedColor}
                             />
                         </div>
                     </div>

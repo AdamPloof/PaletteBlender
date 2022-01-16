@@ -17,7 +17,7 @@ class ColorPicker extends Component {
     componentDidMount() {
         this.colorPicker = new iro.ColorPicker(document.getElementById('color-picker'), {
             // Setting initial color to white for now, should probably set it to whatever primary is though
-            color: "#fff",
+            color: this.props.selectedColor,
             width: 130,
             borderColor: basePalette.greys[4].color
         }); 
@@ -25,6 +25,12 @@ class ColorPicker extends Component {
         this.colorPicker.on(['color:init', 'color:change'], (color) => {
             this.updateColor(color);
         });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.selectedColor !== prevProps.selectedColor) {
+            this.colorPicker.color.hexString = this.props.selectedColor;
+        }
     }
 
     updateColor(color) {
