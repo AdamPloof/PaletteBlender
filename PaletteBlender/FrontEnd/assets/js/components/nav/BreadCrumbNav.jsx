@@ -1,29 +1,28 @@
 import React, { Component } from 'react';
-import { basePalette } from '../basePalette';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
     navbarBreadCrumb: {
-        backgroundColor: basePalette.greys[6].color,
-        borderBottomColor: basePalette.greys[4].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[6].color,
+        borderBottomColor: (colorPalette) => colorPalette.greys[4].color,
     },
     navLinkBreadCrumb: {
-        color: basePalette.primary[2].color,
-        '&:hover': {color: basePalette.primary[3].color},
+        color: (colorPalette) => colorPalette.primary[2].color,
+        '&:hover': {color: (colorPalette) => colorPalette.primary[3].color},
         '&:after': {
             content: '" / "',
-            color: basePalette.primary[2].color,
+            color: (colorPalette) => colorPalette.primary[2].color,
         }
     },
     navLinkActive: {
-        color: basePalette.primary[3].color,
-        '&:hover': {color: basePalette.primary[4].color},
+        color: (colorPalette) => colorPalette.primary[3].color,
+        '&:hover': {color: (colorPalette) => colorPalette.primary[4].color},
 
     }
 });
 
-function BreadCrumbNav() {
-    const classes = useStyles();
+function BreadCrumbNav(props) {
+    const classes = useStyles(props.colorPalette);
 
     return (
         <div className="nav-container">

@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import { createUseStyles } from 'react-jss';
+import React, { useContext } from 'react';
 
-import { basePalette } from './basePalette';
-import { PalletteProvider } from './PaletteContext';
+import { PalletteProvider, PaletteContext } from './PaletteContext';
 
 import SearchBar from './nav/SearchBar';
 import Navbar from './nav/Navbar';
@@ -11,22 +9,30 @@ import BreadCrumbNav from './nav/BreadCrumbNav';
 import ContentContainer from './content/ContentContainer';
 import PaletteEditor from './paletteInterface/PaletteEditor';
 
-const bgColor = basePalette.greys[8].color;
+const ThemedContent = () => {
+    const [ colorPalette ] = useContext(PaletteContext);
+
+    const bgColor = colorPalette.greys[8].color;
+    document.body.style.backgroundColor = bgColor;
+
+    return (
+        <React.Fragment>
+            <SearchBar colorPalette={colorPalette} />
+            <Navbar colorPalette={colorPalette} />
+            <SubNav colorPalette={colorPalette} />
+            <BreadCrumbNav colorPalette={colorPalette} />
+            <ContentContainer colorPalette={colorPalette} />
+        </React.Fragment>
+    );
+}
 
 function App() {
-    document.body.style.backgroundColor = bgColor;
-    
     return (
         <PalletteProvider>
-            <SearchBar />
-            <Navbar />
-            <SubNav />
-            <BreadCrumbNav />
-            <ContentContainer />
+            <ThemedContent />
             <PaletteEditor />
         </PalletteProvider>
     );
 };
 
-export { bgColor };
 export default App;

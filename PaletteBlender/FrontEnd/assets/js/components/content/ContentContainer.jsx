@@ -2,316 +2,313 @@ import React, { Component, useContext } from 'react';
 import { createUseStyles } from 'react-jss';
 import { basePalette } from '../basePalette';
 
-// TODO: define background color in style context and share it between components that way.
-const bgColor = basePalette.greys[8].color;
-
 const useAlertStyles = createUseStyles({
     alertPrimary: {
-        color: basePalette.primary[1].color,
-        backgroundColor: basePalette.primary[6].color,
-        borderColor: basePalette.primary[5].color,
+        color: (colorPalette) => colorPalette.primary[1].color,
+        backgroundColor: (colorPalette) => colorPalette.primary[6].color,
+        borderColor: (colorPalette) => colorPalette.primary[5].color,
         "& .alert-header": {
-            color: bgColor,
-            backgroundColor: basePalette.primary[2].color,
-            borderBottomColor: basePalette.primary[5].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.primary[2].color,
+            borderBottomColor: (colorPalette) => colorPalette.primary[5].color,
         }
     },
     alertInfo: {
-        color: basePalette.info[1].color,
-        backgroundColor: basePalette.info[6].color,
-        borderColor: basePalette.info[5].color,
+        color: (colorPalette) => colorPalette.info[1].color,
+        backgroundColor: (colorPalette) => colorPalette.info[6].color,
+        borderColor: (colorPalette) => colorPalette.info[5].color,
         "& .alert-header": {
-            color: bgColor,
-            backgroundColor: basePalette.info[2].color,
-            borderBottomColor: basePalette.info[5].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.info[2].color,
+            borderBottomColor: (colorPalette) => colorPalette.info[5].color,
         }
     },
     alertSuccess: {
-        color: basePalette.success[1].color,
-        backgroundColor: basePalette.success[6].color,
-        borderColor: basePalette.success[5].color,
+        color: (colorPalette) => colorPalette.success[1].color,
+        backgroundColor: (colorPalette) => colorPalette.success[6].color,
+        borderColor: (colorPalette) => colorPalette.success[5].color,
         "& .alert-header": {
-            color: bgColor,
-            backgroundColor: basePalette.success[2].color,
-            borderBottomColor: basePalette.success[5].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.success[2].color,
+            borderBottomColor: (colorPalette) => colorPalette.success[5].color,
         }
     },
     alertWarning: {
-        color: basePalette.warning[1].color,
-        backgroundColor: basePalette.warning[6].color,
-        borderColor: basePalette.warning[5].color,
+        color: (colorPalette) => colorPalette.warning[1].color,
+        backgroundColor: (colorPalette) => colorPalette.warning[6].color,
+        borderColor: (colorPalette) => colorPalette.warning[5].color,
         "& .alert-header": {
-            color: bgColor,
-            backgroundColor: basePalette.warning[2].color,
-            borderBottomColor: basePalette.warning[5].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.warning[2].color,
+            borderBottomColor: (colorPalette) => colorPalette.warning[5].color,
         }
     },
     alertDanger: {
-        color: basePalette.danger[1].color,
-        backgroundColor: basePalette.danger[6].color,
-        borderColor: basePalette.danger[5].color,
+        color: (colorPalette) => colorPalette.danger[1].color,
+        backgroundColor: (colorPalette) => colorPalette.danger[6].color,
+        borderColor: (colorPalette) => colorPalette.danger[5].color,
         "& .alert-header": {
-            color: bgColor,
-            backgroundColor: basePalette.danger[2].color,
-            borderBottomColor: basePalette.danger[5].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.danger[2].color,
+            borderBottomColor: (colorPalette) => colorPalette.danger[5].color,
         }
     },
     alertLight: {
-        color: basePalette.greys[1].color,
-        backgroundColor: basePalette.greys[8].color,
-        borderColor: basePalette.greys[7].color,
+        color: (colorPalette) => colorPalette.greys[1].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[8].color,
+        borderColor: (colorPalette) => colorPalette.greys[7].color,
         "& .alert-header": {
-            color: basePalette.greys[0].color,
-            backgroundColor: basePalette.greys[5].color,
-            borderBottomColor: basePalette.greys[4].color,
+            color: (colorPalette) => colorPalette.greys[0].color,
+            backgroundColor: (colorPalette) => colorPalette.greys[5].color,
+            borderBottomColor: (colorPalette) => colorPalette.greys[4].color,
         }
     },
     alertDark: {
-        color: bgColor,
-        backgroundColor: basePalette.greys[2].color,
-        borderColor: basePalette.greys[4].color,
+        color: (colorPalette) => colorPalette.greys[8].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[2].color,
+        borderColor: (colorPalette) => colorPalette.greys[4].color,
         "& .alert-header": {
-            color: bgColor,
-            backgroundColor: basePalette.greys[3].color,
-            borderBottomColor: basePalette.greys[2].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.greys[3].color,
+            borderBottomColor: (colorPalette) => colorPalette.greys[2].color,
         }
     },
 });
 
 const useStyles = createUseStyles({
     success: {
-        color: basePalette.success[2].color,
+        color: (colorPalette) => colorPalette.success[2].color,
     },
     muted: {
-        color: basePalette.greys[3].color,
+        color: (colorPalette) => colorPalette.greys[3].color,
     },
     info: {
-        color: basePalette.info[2].color,
+        color: (colorPalette) => colorPalette.info[2].color,
     },
     warning: {
-        color: basePalette.warning[2].color,
+        color: (colorPalette) => colorPalette.warning[2].color,
     },
     danger: {
-        color: basePalette.danger[2].color,
+        color: (colorPalette) => colorPalette.danger[2].color,
     },
     btnPrimary: {
         color: "#fff",
-        backgroundColor: basePalette.primary[2].color,
-        borderColor: basePalette.primary[2].color,
+        backgroundColor: (colorPalette) => colorPalette.primary[2].color,
+        borderColor: (colorPalette) => colorPalette.primary[2].color,
         "&:hover": {
-            backgroundColor: basePalette.primary[1].color,
-            borderColor: basePalette.primary[1].color,
+            backgroundColor: (colorPalette) => colorPalette.primary[1].color,
+            borderColor: (colorPalette) => colorPalette.primary[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.primary[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.primary[3].color,
         },
     },
     btnSuccess: {
         color: "#fff",
-        backgroundColor: basePalette.success[2].color,
-        borderColor: basePalette.success[2].color,
+        backgroundColor: (colorPalette) => colorPalette.success[2].color,
+        borderColor: (colorPalette) => colorPalette.success[2].color,
         "&:hover": {
-            backgroundColor: basePalette.success[1].color,
-            borderColor: basePalette.success[1].color,
+            backgroundColor: (colorPalette) => colorPalette.success[1].color,
+            borderColor: (colorPalette) => colorPalette.success[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.success[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.success[3].color,
         },
     },
     btnInfo: {
         color: "#fff",
-        backgroundColor: basePalette.info[3].color,
-        borderColor: basePalette.info[3].color,
+        backgroundColor: (colorPalette) => colorPalette.info[3].color,
+        borderColor: (colorPalette) => colorPalette.info[3].color,
         "&:hover": {
-            backgroundColor: basePalette.info[2].color,
-            borderColor: basePalette.info[2].color,
+            backgroundColor: (colorPalette) => colorPalette.info[2].color,
+            borderColor: (colorPalette) => colorPalette.info[2].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.info[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.info[3].color,
         },
     },
     btnWarning: {
         color: "#fff",
-        backgroundColor: basePalette.warning[2].color,
-        borderColor: basePalette.warning[2].color,
+        backgroundColor: (colorPalette) => colorPalette.warning[2].color,
+        borderColor: (colorPalette) => colorPalette.warning[2].color,
         "&:hover": {
-            backgroundColor: basePalette.warning[1].color,
-            borderColor: basePalette.warning[1].color,
+            backgroundColor: (colorPalette) => colorPalette.warning[1].color,
+            borderColor: (colorPalette) => colorPalette.warning[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.warning[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.warning[3].color,
         },
     },
     btnDanger: {
         color: "#fff",
-        backgroundColor: basePalette.danger[2].color,
-        borderColor: basePalette.danger[2].color,
+        backgroundColor: (colorPalette) => colorPalette.danger[2].color,
+        borderColor: (colorPalette) => colorPalette.danger[2].color,
         "&:hover": {
-            backgroundColor: basePalette.danger[1].color,
-            borderColor: basePalette.danger[1].color,
+            backgroundColor: (colorPalette) => colorPalette.danger[1].color,
+            borderColor: (colorPalette) => colorPalette.danger[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.danger[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.danger[3].color,
         },
     },
     btnLight: {
-        color: basePalette.greys[2].color,
-        backgroundColor: basePalette.greys[6].color,
-        borderColor: basePalette.greys[6].color,
+        color: (colorPalette) => colorPalette.greys[2].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[6].color,
+        borderColor: (colorPalette) => colorPalette.greys[6].color,
         "&:hover": {
-            backgroundColor: basePalette.greys[5].color,
-            borderColor: basePalette.greys[5].color,
+            backgroundColor: (colorPalette) => colorPalette.greys[5].color,
+            borderColor: (colorPalette) => colorPalette.greys[5].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.greys[4].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.greys[4].color,
         },
     },
     btnDark: {
         color: "#fff",
-        backgroundColor: basePalette.greys[2].color,
-        borderColor: basePalette.greys[2].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[2].color,
+        borderColor: (colorPalette) => colorPalette.greys[2].color,
         "&:hover": {
-            backgroundColor: basePalette.greys[1].color,
-            borderColor: basePalette.greys[1].color,
+            backgroundColor: (colorPalette) => colorPalette.greys[1].color,
+            borderColor: (colorPalette) => colorPalette.greys[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.greys[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.greys[3].color,
         },
     },
     btnOutlinePrimary: {
-        color: basePalette.primary[2].color,
-        backgroundColor: bgColor,
-        borderColor: basePalette.primary[2].color,
+        color: (colorPalette) => colorPalette.primary[2].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[8].color,
+        borderColor: (colorPalette) => colorPalette.primary[2].color,
         "&:hover": {
-            color: bgColor,
-            backgroundColor: basePalette.primary[1].color,
-            borderColor: basePalette.primary[1].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.primary[1].color,
+            borderColor: (colorPalette) => colorPalette.primary[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.primary[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.primary[3].color,
         },
     },
     btnOutlineSuccess: {
-        color: basePalette.success[2].color,
-        backgroundColor: bgColor,
-        borderColor: basePalette.success[2].color,
+        color: (colorPalette) => colorPalette.success[2].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[8].color,
+        borderColor: (colorPalette) => colorPalette.success[2].color,
         "&:hover": {
-            color: bgColor,
-            backgroundColor: basePalette.success[1].color,
-            borderColor: basePalette.success[1].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.success[1].color,
+            borderColor: (colorPalette) => colorPalette.success[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.success[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.success[3].color,
         },
     },
     btnOutlineInfo: {
-        color: basePalette.info[3].color,
-        backgroundColor: bgColor,
-        borderColor: basePalette.info[3].color,
+        color: (colorPalette) => colorPalette.info[3].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[8].color,
+        borderColor: (colorPalette) => colorPalette.info[3].color,
         "&:hover": {
-            color: bgColor,
-            backgroundColor: basePalette.info[2].color,
-            borderColor: basePalette.info[2].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.info[2].color,
+            borderColor: (colorPalette) => colorPalette.info[2].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.info[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.info[3].color,
         },
     },
     btnOutlineWarning: {
-        color: basePalette.warning[2].color,
-        backgroundColor: bgColor,
-        borderColor: basePalette.warning[2].color,
+        color: (colorPalette) => colorPalette.warning[2].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[8].color,
+        borderColor: (colorPalette) => colorPalette.warning[2].color,
         "&:hover": {
-            color: bgColor,
-            backgroundColor: basePalette.warning[1].color,
-            borderColor: basePalette.warning[1].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.warning[1].color,
+            borderColor: (colorPalette) => colorPalette.warning[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.warning[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.warning[3].color,
         },
     },
     btnOutlineDanger: {
-        color: basePalette.danger[2].color,
-        backgroundColor: bgColor,
-        borderColor: basePalette.danger[2].color,
+        color: (colorPalette) => colorPalette.danger[2].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[8].color,
+        borderColor: (colorPalette) => colorPalette.danger[2].color,
         "&:hover": {
-            color: bgColor,
-            backgroundColor: basePalette.danger[1].color,
-            borderColor: basePalette.danger[1].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.danger[1].color,
+            borderColor: (colorPalette) => colorPalette.danger[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.danger[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.danger[3].color,
         },
     },
     btnOutlineLight: {
-        color: basePalette.greys[4].color,
-        backgroundColor: bgColor,
-        borderColor: basePalette.greys[6].color,
+        color: (colorPalette) => colorPalette.greys[4].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[8].color,
+        borderColor: (colorPalette) => colorPalette.greys[6].color,
         "&:hover": {
-            color: bgColor,
-            backgroundColor: basePalette.greys[5].color,
-            borderColor: basePalette.greys[5].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.greys[5].color,
+            borderColor: (colorPalette) => colorPalette.greys[5].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.greys[4].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.greys[4].color,
         },
     },
     btnOutlineDark: {
-        color: basePalette.greys[2].color,
-        backgroundColor: bgColor,
-        borderColor: basePalette.greys[2].color,
+        color: (colorPalette) => colorPalette.greys[2].color,
+        backgroundColor: (colorPalette) => colorPalette.greys[8].color,
+        borderColor: (colorPalette) => colorPalette.greys[2].color,
         "&:hover": {
-            color: bgColor,
-            backgroundColor: basePalette.greys[1].color,
-            borderColor: basePalette.greys[1].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.greys[1].color,
+            borderColor: (colorPalette) => colorPalette.greys[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.greys[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.greys[3].color,
         },
     },
     btnPaginate: {
-        color: bgColor,
-        backgroundColor: basePalette.primary[3].color,
-        borderColor: basePalette.primary[3].color,
+        color: (colorPalette) => colorPalette.greys[8].color,
+        backgroundColor: (colorPalette) => colorPalette.primary[3].color,
+        borderColor: (colorPalette) => colorPalette.primary[3].color,
         "&:hover": {
-            backgroundColor: basePalette.primary[2].color,
-            borderColor: basePalette.primary[2].color,
+            backgroundColor: (colorPalette) => colorPalette.primary[2].color,
+            borderColor: (colorPalette) => colorPalette.primary[2].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.primary[4].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.primary[4].color,
         },
     },
     btnPaginateActive: {
-        color: bgColor,
-        backgroundColor: basePalette.primary[2].color,
-        borderColor: basePalette.primary[2].color,
+        color: (colorPalette) => colorPalette.greys[8].color,
+        backgroundColor: (colorPalette) => colorPalette.primary[2].color,
+        borderColor: (colorPalette) => colorPalette.primary[2].color,
         "&:hover": {
-            color: bgColor,
-            backgroundColor: basePalette.primary[1].color,
-            borderColor: basePalette.primary[1].color,
+            color: (colorPalette) => colorPalette.greys[8].color,
+            backgroundColor: (colorPalette) => colorPalette.primary[1].color,
+            borderColor: (colorPalette) => colorPalette.primary[1].color,
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.25rem " + basePalette.primary[3].color,
+            boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.primary[3].color,
         },
     },
     btnPaginateDisabled: {
-        color: basePalette.greys[3].color,
-        backgroundColor: basePalette.primary[5].color,
-        borderColor: basePalette.primary[5].color,
+        color: (colorPalette) => colorPalette.greys[3].color,
+        backgroundColor: (colorPalette) => colorPalette.primary[5].color,
+        borderColor: (colorPalette) => colorPalette.primary[5].color,
         cursor: "default",
     },
 });
 
 const useLinkStyles = createUseStyles({
     linkStd: {
-        color: basePalette.primary[3].color,
-        '&:hover': {color: basePalette.primary[2].color},
+        color: (colorPalette) => colorPalette.primary[3].color,
+        '&:hover': {color: (colorPalette) => colorPalette.primary[2].color},
     },
 });
 
-function ParagraphSection() {
-    const linkClasses = useLinkStyles();
-    const classes = useStyles();
+function ParagraphSection(props) {
+    const linkClasses = useLinkStyles(props.colorPalette);
+    const classes = useStyles(props.colorPalette);
 
     return (
         <div className="content-section two-col">
@@ -346,8 +343,8 @@ function ParagraphSection() {
     )    
 }
 
-function ButtonSection() {
-    const classes = useStyles();
+function ButtonSection(props) {
+    const classes = useStyles(props.colorPalette);
 
     return (
         <div className="content-section">
@@ -387,8 +384,8 @@ function ButtonSection() {
 }
 
 // TODO: make alert factory function. And probably other factory functions while we're at it.
-function AlertSection() {
-    const alertClasses = useAlertStyles();
+function AlertSection(props) {
+    const alertClasses = useAlertStyles(props.colorPalette);
     return (
         <div className="content-section three-col">
             <div className="col">
@@ -486,12 +483,12 @@ function AlertSection() {
     );
 }
  
-function ContentContainer() {
+function ContentContainer(props) {
     return (
         <div className="content">
-            <ParagraphSection />
-            <ButtonSection />
-            <AlertSection />
+            <ParagraphSection colorPalette={props.colorPalette} />
+            <ButtonSection colorPalette={props.colorPalette} />
+            <AlertSection colorPalette={props.colorPalette} />
         </div>
     )
 }

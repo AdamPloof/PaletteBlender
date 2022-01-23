@@ -1,24 +1,23 @@
-import React, { Component } from 'react';
-import { basePalette } from '../basePalette';
+import React from 'react';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
     navbarMain: {
-        backgroundColor: basePalette.primary[1].color,
-        borderBottomColor: basePalette.greys[4].color,
+        backgroundColor: (colorPalette) => colorPalette.primary[1].color,
+        borderBottomColor: (colorPalette) => colorPalette.greys[4].color,
     },
 
     navLinkMain: {
-        color: basePalette.primary[6].color,
-        '&:hover': {color: basePalette.primary[5].color},
+        color: (colorPalette) => colorPalette.primary[6].color,
+        '&:hover': {color: (colorPalette) => colorPalette.primary[5].color},
     },
     navLogoMain: {
-        color: basePalette.primary[6].color,
+        color: (colorPalette) => colorPalette.primary[6].color,
     }
 });
 
-function Navbar() {
-    const classes = useStyles();
+function Navbar(props) {
+    const classes = useStyles(props.colorPalette);
 
     return (
         <div className="nav-container">
