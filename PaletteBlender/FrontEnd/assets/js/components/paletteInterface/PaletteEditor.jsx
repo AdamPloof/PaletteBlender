@@ -62,7 +62,6 @@ function SubPaletteSelector(props) {
                 })}
             </React.Fragment>
         );
-
     }
 
     return (
@@ -82,7 +81,9 @@ function SubPaletteSelector(props) {
                 </select>
                 <div className="section-options">
                     <div className="btn btn-info">View CSS</div>
-                    <div className="btn btn-light">Reset</div>
+                    <div className="btn btn-light" onClick={props.resetSelectedSubPalette}>
+                        Reset
+                    </div>
                 </div>
             </div>
         </div>
@@ -229,7 +230,9 @@ function PaletteViewer(props) {
                         <i className='material-icon-outline'>{getLockBtnIcon()}</i>
                     </div>
                     <div className="btn btn-outline-info">Fill Shades</div>
-                    <div className="btn btn-outline-info">Reset Color</div>
+                    <div className="btn btn-outline-info" onClick={props.resetSelectedColor}>
+                        Reset Color
+                    </div>
                 </div>
 
             </div>
@@ -254,6 +257,47 @@ function PaletteEditor() {
         deselectAllColors();
         setSelectedColor(DEFAULT_COLOR);
     }, [selectedPaletteName]);
+
+    const resetSelectedSubPalette = () => {
+        const updatedSubpalette = colorPalette[selectedPaletteName].map(color => {
+            if (color.locked === true) {
+                return color;
+            } else {
+                return {...basePalette[selectedPaletteName].find(baseColor => baseColor.name === color.name)}
+            }
+        });
+        
+        const updatedPalette = {...colorPalette};
+        updatedPalette[selectedPaletteName] = updatedSubpalette;
+
+        setColorPalette(updatedPalette);
+        
+        // Just unsetting the selected color on full sub palette refresh -- might be nice to find out previously selected color
+        // and set that in the updatedPalette instead.
+        setSelectedColor(DEFAULT_COLOR);
+    }
+
+    const resetSelectedColor = () => {
+        if (selectedColor.locked === true) {
+            return;
+        }
+        
+        const baseColor = {...basePalette[selectedPaletteName].find(color => color.name === selectedColor.name)};
+        const subPalette = colorPalette[selectedPaletteName].map(colorObj => {
+            if (colorObj.name === selectedColor.name) {
+                colorObj.color = baseColor.color;
+            }
+
+            return colorObj;
+        });
+
+        const updatedPalette = {...colorPalette};
+        updatedPalette[selectedPaletteName] = subPalette;
+        setColorPalette(updatedPalette);
+
+        // Refresh selected color so that the changes are passed to the color picker
+        setSelectedColor({...updatedPalette[selectedPaletteName].find(colorObj => colorObj.selected === true)});
+    }
 
     const deselectAllColors = () => {
         let updatedPalette = {};
@@ -330,6 +374,7 @@ function PaletteEditor() {
                             subPaletteNames={subPaletteNames}
                             selectedPaletteName={selectedPaletteName}
                             setSelectedPaletteName={setSelectedPaletteName}
+                            resetSelectedSubPalette={resetSelectedSubPalette}
                             colorPalette={colorPalette}
                         />
                     </div>
@@ -338,6 +383,7 @@ function PaletteEditor() {
                             visibility={visibility}
                             selectedPaletteName={selectedPaletteName}
                             setSelectedColor={setSelectedColor}
+                            resetSelectedColor={resetSelectedColor}
                         />
                     </div>
                     <div className="editor-section">
@@ -345,6 +391,7 @@ function PaletteEditor() {
                             <ColorPicker 
                                 visibility={visibility}
                                 selectedColor={selectedColor}
+                                setSelectedColor={setSelectedColor}
                                 selectedPaletteName={selectedPaletteName}
                                 colorPalette={colorPalette}
                                 setColorPalette={setColorPalette}

@@ -35,6 +35,7 @@ class ColorPicker extends Component {
             const subPalette = this.props.colorPalette[this.props.selectedPaletteName].map(colorObj => {
                 if (colorObj.name === this.props.selectedColor.name) {
                     colorObj.color = color.hexString;
+                    this.props.setSelectedColor({...colorObj});
                 }
 
                 return colorObj;
@@ -48,6 +49,10 @@ class ColorPicker extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (this.props.selectedColor.name !== prevProps.selectedColor.name) {
+            this.colorPicker.color.hexString = this.props.selectedColor.color;
+        }
+
+        if (this.props.selectedColor.color !== prevProps.selectedColor.color) {
             this.colorPicker.color.hexString = this.props.selectedColor.color;
         }
     }
