@@ -3,8 +3,6 @@ import iro from '@jaames/iro';
 
 import { PaletteContext } from "../PaletteContext";
 
-// TODO: update when colors are changed/unlocked/reset.
-
 // Take the average hue and saturation for the selected palette
 // Only count colors that aren't locked.
 function getAverageHueAndSaturation(palette) {
@@ -47,7 +45,7 @@ export default function ShadeEditor(props) {
         setHue(avgHue);
         setSaturation(avgSat);
         setLightness(avgLight);
-    }, [props.selectedPaletteName]);
+    }, [props.selectedPaletteName, colorPalette]);
 
     return (
         <div className="shade-editor">
