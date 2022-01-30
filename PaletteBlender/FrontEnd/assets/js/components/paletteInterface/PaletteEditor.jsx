@@ -263,11 +263,11 @@ function PaletteViewer(props) {
                         onClick={props.resetSelectedColor}
                         style={{display: 'flex'}}
                     >
-                        <span class="material-icon-outline">
+                        <span className="material-icon-outline">
                             undo
                         </span>
                     </div>
-                    <div className="btn btn-outline-info" onClick={props.resetSelectedColor}>
+                    <div className="btn btn-outline-info">
                         Explode
                     </div>
                     {getEditorModeBtn()}
@@ -319,7 +319,7 @@ function PaletteEditor() {
     }
 
     const resetSelectedColor = () => {
-        if (selectedColor.locked === true) {
+        if (selectedColor.name === null || selectedColor.locked === true) {
             return;
         }
         
@@ -402,7 +402,9 @@ function PaletteEditor() {
             );
         } else {
             tool = (
-                <ShadeEditor />
+                <ShadeEditor 
+                    selectedPaletteName={selectedPaletteName}
+                />
             );
         }
 
