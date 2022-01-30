@@ -212,7 +212,7 @@ function PaletteViewer(props) {
                         props.setEditorMode('shades');
                     }}
                 >
-                    Edit Shades
+                    Shades...
                 </div>
             );
         } else {
@@ -223,7 +223,7 @@ function PaletteViewer(props) {
                         props.setEditorMode('color');
                     }}
                 >
-                    Edit Color
+                    Color...
                 </div>
             );
         }
@@ -259,10 +259,18 @@ function PaletteViewer(props) {
                     >
                         <i className='material-icon-outline'>{getLockBtnIcon()}</i>
                     </div>
-                    {getEditorModeBtn()}
-                    <div className="btn btn-outline-info" onClick={props.resetSelectedColor}>
-                        Reset Color
+                    <div className="btn btn-outline-light" 
+                        onClick={props.resetSelectedColor}
+                        style={{display: 'flex'}}
+                    >
+                        <span class="material-icon-outline">
+                            undo
+                        </span>
                     </div>
+                    <div className="btn btn-outline-info" onClick={props.resetSelectedColor}>
+                        Explode
+                    </div>
+                    {getEditorModeBtn()}
                 </div>
 
             </div>
