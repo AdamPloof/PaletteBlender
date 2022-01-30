@@ -3,6 +3,7 @@ import { basePalette } from '../basePalette';
 
 import { PaletteContext } from '../PaletteContext';
 import ColorPicker from './ColorPicker';
+import ShadeEditor from './ShadeEditor';
 
 const DEFAULT_COLOR = {
     name: null,
@@ -80,7 +81,7 @@ function SubPaletteSelector(props) {
                     {getColorOptions()}
                 </select>
                 <div className="section-options">
-                    <div className="btn btn-info">View CSS</div>
+                    <div className="btn btn-info">CSS Tools</div>
                     <div className="btn btn-light" onClick={props.resetSelectedSubPalette}>
                         Reset
                     </div>
@@ -200,6 +201,35 @@ function PaletteViewer(props) {
 
         return formatColorNameForCss(selectedColor.name);
     }
+
+    const getEditorModeBtn = () => {
+        let editorBtn;
+        if (props.editorMode === 'color') {
+            editorBtn = (
+                <div 
+                    className="btn btn-outline-info"
+                    onClick={() => {
+                        props.setEditorMode('shades');
+                    }}
+                >
+                    Edit Shades
+                </div>
+            );
+        } else {
+            editorBtn = (
+                <div
+                    className="btn btn-outline-info"
+                    onClick={() => {
+                        props.setEditorMode('color');
+                    }}
+                >
+                    Edit Color
+                </div>
+            );
+        }
+
+        return editorBtn;
+    };
     
     return (
         <div className={getPaletteViewerClass()}>
@@ -229,7 +259,7 @@ function PaletteViewer(props) {
                     >
                         <i className='material-icon-outline'>{getLockBtnIcon()}</i>
                     </div>
-                    <div className="btn btn-outline-info">Fill Shades</div>
+                    {getEditorModeBtn()}
                     <div className="btn btn-outline-info" onClick={props.resetSelectedColor}>
                         Reset Color
                     </div>
@@ -252,6 +282,9 @@ function PaletteEditor() {
     const subPaletteNames = Object.keys(colorPalette);
     const [ selectedPaletteName, setSelectedPaletteName ] = useState(subPaletteNames[0]);
     const [ selectedColor, setSelectedColor ] = useState(DEFAULT_COLOR);
+
+    // Available color modes: color & shades
+    const [ editorMode, setEditorMode ] = useState('color');
 
     useEffect(() => {
         deselectAllColors();
@@ -331,7 +364,7 @@ function PaletteEditor() {
         }
 
         return pickerClass;
-    }
+    };
 
     const expandPaletteEditor = () => {
         const content = document.getElementsByClassName('content')[0];
@@ -344,6 +377,28 @@ function PaletteEditor() {
         }
 
         setVisibility(visibility === 'hide' ? 'show' : 'hide');
+    };
+
+    const getEditorTool = () => {
+        let tool;
+        if (editorMode === 'color')     {
+            tool = (
+                <ColorPicker 
+                    visibility={visibility}
+                    selectedColor={selectedColor}
+                    setSelectedColor={setSelectedColor}
+                    selectedPaletteName={selectedPaletteName}
+                    colorPalette={colorPalette}
+                    setColorPalette={setColorPalette}
+                />
+            );
+        } else {
+            tool = (
+                <ShadeEditor />
+            );
+        }
+
+        return tool;
     };
 
     return (
@@ -384,18 +439,13 @@ function PaletteEditor() {
                             selectedPaletteName={selectedPaletteName}
                             setSelectedColor={setSelectedColor}
                             resetSelectedColor={resetSelectedColor}
+                            editorMode={editorMode}
+                            setEditorMode={setEditorMode}
                         />
                     </div>
                     <div className="editor-section">
                         <div className={getPalettePickerClass()}>
-                            <ColorPicker 
-                                visibility={visibility}
-                                selectedColor={selectedColor}
-                                setSelectedColor={setSelectedColor}
-                                selectedPaletteName={selectedPaletteName}
-                                colorPalette={colorPalette}
-                                setColorPalette={setColorPalette}
-                            />
+                            {getEditorTool()}
                         </div>
                     </div>
                 </div>

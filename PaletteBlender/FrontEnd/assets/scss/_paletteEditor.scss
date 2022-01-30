@@ -285,3 +285,22 @@ $editorTopTransition: top .4s ease-in-out;
     width: 50px;
     border: 1px solid $grey-light;
 }
+
+.shade-editor {
+    display: flex;
+    flex-direction: column;
+
+    .hsl-editor {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+
+        .hsl-slider-label {
+            width: 30%;
+        }
+
+        .hsl-input {
+            width: 70%;
+        }
+    }
+}
