@@ -6,11 +6,12 @@ import { PaletteContext } from "../PaletteContext";
 // Take the average hue and saturation for the selected palette
 // Only count colors that aren't locked.
 function getAverageHueAndSaturation(palette) {
-    const unlockedColors = palette.map(color => {
+    let unlockedColors = palette.filter(color => {
         if (!color.locked) {
             return color.color;
         }
     });
+    unlockedColors = unlockedColors.map(color => color.color);
 
     const avgHue = unlockedColors.reduce((prevVal, currentVal) => {
         const currentColor = new iro.Color(currentVal);
@@ -36,16 +37,30 @@ export default function ShadeEditor(props) {
 
     const [avgHue, avgSat, avgLight] = getAverageHueAndSaturation(selectedPalette);
 
+    const [preventSliderReset, setPreventSliderReset] = useState(false);
     const [hue, setHue] = useState(avgHue);
     const [saturation, setSaturation] = useState(avgSat);
     const [lightness, setLightness] = useState(avgLight);
 
     useEffect(() => {
+        setSlidersToAverageHSL();
+        setPreventSliderReset(false);
+    }, [props.selectedPaletteName]);
+
+    // TODO: In order to prevent unnecessary rerender, infinite loops, etc. We should only update the sliders to avg when either:
+    // 1. The selected sub palette changed, 2. a locked color status changed, 3. a color was reset, 4. entire sub palette reset
+    useEffect(() => {
+        if (!preventSliderReset) {
+            setSlidersToAverageHSL();
+        }
+    }, [colorPalette]);
+
+    const setSlidersToAverageHSL = () => {
         const [avgHue, avgSat, avgLight] = getAverageHueAndSaturation(colorPalette[props.selectedPaletteName]);
         setHue(avgHue);
         setSaturation(avgSat);
         setLightness(avgLight);
-    }, [props.selectedPaletteName, colorPalette]);
+    }
 
     return (
         <div className="shade-editor">
@@ -65,6 +80,7 @@ export default function ShadeEditor(props) {
                                 max="360"
                                 value={hue}
                                 onChange={(e) => {
+                                    setPreventSliderReset(true);
                                     setHue(e.target.value)
                                 }}
                             />
@@ -86,6 +102,7 @@ export default function ShadeEditor(props) {
                                 max="100"
                                 value={saturation}
                                 onChange={(e) => {
+                                    setPreventSliderReset(true);
                                     setSaturation(e.target.value)
                                 }}
                             />
@@ -107,6 +124,7 @@ export default function ShadeEditor(props) {
                                 max="100"
                                 value={lightness}
                                 onChange={(e) => {
+                                    setPreventSliderReset(true);
                                     setLightness(e.target.value)
                                 }}
                             />
