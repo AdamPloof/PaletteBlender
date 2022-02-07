@@ -1,13 +1,17 @@
 @import "variables";
 
-$editorHeightTransition: height .4s ease-in-out;
-$editorTopTransition: top .4s ease-in-out;
+$editorHeight: 195px;
 
 .footer-container {
     position: fixed;
     bottom:0;
     width: 100%;
     z-index: 10;
+    transition: transform .4s ease-in-out;
+
+    &.collapse {
+        transform: translateY($editorHeight);
+    }
 }
 
 #palette-editor {
@@ -43,12 +47,7 @@ $editorTopTransition: top .4s ease-in-out;
 
 .editor-body {
     flex-grow: 1;
-    height: 0px;
-    transition: $editorHeightTransition;
-
-    &.expanded {
-        height: 195px;
-    }
+    height: $editorHeight;
 
     .editor-section {
         display: flex;
@@ -80,8 +79,7 @@ $editorTopTransition: top .4s ease-in-out;
     align-items: center;
     overflow: hidden;
     width: 100%;
-    height: 0px;
-    transition: $editorHeightTransition;
+    height: 170px;
 
     .section-options {
         margin-top: 1rem;
@@ -92,10 +90,6 @@ $editorTopTransition: top .4s ease-in-out;
         grid-template-columns: 1fr 1fr;
         column-gap: 2rem;
     }
-
-    &.expanded {
-        height: 170px;
-    }
 }
 
 .palette-selector {
@@ -103,24 +97,15 @@ $editorTopTransition: top .4s ease-in-out;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 170px;
 
     .selector-input {
         position: relative;
         width: 100%;
-        top: 120px;
-        transition: $editorTopTransition;
 
         label {
             display: flex;
             margin-bottom: .5rem;
-        }
-    }
-
-    &.expanded {
-        height: 170px;
-        
-        .selector-input {
-            top: 0;
         }
     }
 }
@@ -128,12 +113,7 @@ $editorTopTransition: top .4s ease-in-out;
 .palette-viewer {
     display: flex;
     flex-direction: column;
-    height: 0px;
-    transition: $editorHeightTransition;
-
-    &.expanded {
-        height: 170px;
-    }
+    height: 170px;
 
     .viewer-section-top,
     .viewer-section-bottom {

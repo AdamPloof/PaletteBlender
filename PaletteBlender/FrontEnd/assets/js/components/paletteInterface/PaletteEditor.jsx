@@ -37,17 +37,6 @@ function formatColorNameForCss(colorName) {
 }
 
 function SubPaletteSelector(props) {
-    const getPaletteSelectorClass = () => {
-        let pickerClass = "palette-selector";
-        if (props.visibility === 'hide') {
-            pickerClass += ' collapse';
-        } else {
-            pickerClass += ' expanded';
-        }
-
-        return pickerClass;
-    }
-
     const getColorOptions = () => {
         return (
             <React.Fragment>
@@ -66,7 +55,7 @@ function SubPaletteSelector(props) {
     }
 
     return (
-        <div className={getPaletteSelectorClass()}>
+        <div className="palette-selector">
             <div className="selector-input">
                 <label htmlFor="palette-select">Select Sub-Palette</label>
                 <select 
@@ -156,17 +145,6 @@ function PaletteViewer(props) {
         ));
     };
 
-    const getPaletteViewerClass = () => {
-        let pickerClass = "palette-viewer";
-        if (props.visibility === 'hide') {
-            pickerClass += ' collapse';
-        } else {
-            pickerClass += ' expanded';
-        }
-
-        return pickerClass;
-    };
-
     const toggleColorLock = () => {
         const subPalette = colorPalette[props.selectedPaletteName].map(colorObj => {
             if (colorObj.selected === true) {
@@ -232,7 +210,7 @@ function PaletteViewer(props) {
     };
     
     return (
-        <div className={getPaletteViewerClass()}>
+        <div className="palette-viewer">
             <div className="viewer-section-top">
                 <div className="color-info">
                     <div className="info-title">
@@ -363,15 +341,15 @@ function PaletteEditor() {
         return bodyClass;
     };
 
-    const getPalettePickerClass = () => {
-        let pickerClass = "palette-picker";
+    const getContainerClass = () => {
+        let containerClass = "footer-container";
         if (visibility === 'hide') {
-            pickerClass += ' collapse';
+            containerClass += ' collapse';
         } else {
-            pickerClass += ' expanded';
+            containerClass += ' expanded';
         }
 
-        return pickerClass;
+        return containerClass;
     };
 
     const expandPaletteEditor = () => {
@@ -412,7 +390,7 @@ function PaletteEditor() {
     };
 
     return (
-        <div className="footer-container">
+        <div className={getContainerClass()}>
             <div id="palette-editor">
                 <div className="editor-header">
                     <div className="header-left">
@@ -435,7 +413,6 @@ function PaletteEditor() {
                 <div className={getBodyClass()}>
                     <div className="editor-section">
                         <SubPaletteSelector 
-                            visibility={visibility}
                             subPaletteNames={subPaletteNames}
                             selectedPaletteName={selectedPaletteName}
                             setSelectedPaletteName={setSelectedPaletteName}
@@ -445,7 +422,6 @@ function PaletteEditor() {
                     </div>
                     <div className="editor-section">
                         <PaletteViewer
-                            visibility={visibility}
                             selectedPaletteName={selectedPaletteName}
                             setSelectedColor={setSelectedColor}
                             resetSelectedColor={resetSelectedColor}
@@ -454,7 +430,7 @@ function PaletteEditor() {
                         />
                     </div>
                     <div className="editor-section">
-                        <div className={getPalettePickerClass()}>
+                        <div className="palette-picker">
                             {getEditorTool()}
                         </div>
                     </div>
