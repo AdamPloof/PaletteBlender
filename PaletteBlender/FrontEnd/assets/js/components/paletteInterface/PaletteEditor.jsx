@@ -277,6 +277,10 @@ function PaletteEditor() {
         setSelectedColor(DEFAULT_COLOR);
     }, [selectedPaletteName]);
 
+    // hslResetCounter is used to force updates of the hsl slider when a sub palette is reset.
+    // This is approach is probably frowned upon, but it's very simple, and since it only triggers a rerender on
+    // resetting a color palette (very occasionally) this seems like a fine approach.
+    const [hslResetCounter, resetHslEditor] = useState(0);
     const resetSelectedSubPalette = () => {
         const updatedSubpalette = colorPalette[selectedPaletteName].map(color => {
             if (color.locked === true) {
@@ -294,6 +298,7 @@ function PaletteEditor() {
         // Just unsetting the selected color on full sub palette refresh -- might be nice to find out previously selected color
         // and set that in the updatedPalette instead.
         setSelectedColor(DEFAULT_COLOR);
+        resetHslEditor(prevCount => prevCount + 1);
     }
 
     const resetSelectedColor = () => {
@@ -382,6 +387,7 @@ function PaletteEditor() {
             tool = (
                 <ShadeEditor 
                     selectedPaletteName={selectedPaletteName}
+                    hslResetCounter={hslResetCounter}
                 />
             );
         }

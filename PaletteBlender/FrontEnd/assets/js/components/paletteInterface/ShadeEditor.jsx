@@ -72,7 +72,7 @@ export default function ShadeEditor(props) {
         setSlidersToAverageHSL();
         setUserHasModifiedHSL(false);
         setInitialPalette(JSON.parse(JSON.stringify(colorPalette[props.selectedPaletteName])));
-    }, [props.selectedPaletteName]);
+    }, [props.selectedPaletteName, props.hslResetCounter]);
 
     // TODO: In order to prevent unnecessary rerender, infinite loops, etc. We should only update the sliders to avg when either:
     // 2. a locked color status changed, 3. a color was reset, 4. entire sub palette reset
