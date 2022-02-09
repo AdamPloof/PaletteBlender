@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import iro from '@jaames/iro';
 import { basePalette } from '../basePalette';
 
 import { PaletteContext } from '../PaletteContext';
@@ -209,9 +210,49 @@ function PaletteViewer(props) {
         return editorBtn;
     };
 
+    const explodeSelectedPalette = (e) => {
+        if (!colorIsSelected()) {
+            return;
+        }
+
+        // Get HSL of selected color
+        const color = new iro.Color(props.selectedColor.color);
+        const rootHsl = color.hsl;
+        const subPalette = [...colorPalette[props.selectedPaletteName]];
+
+        // For lightness increment: 80 / n = increment for each lightness step in the palette wheere n is the number of colors for that palette
+        const lightnessIncrement = (90 / subPalette.length);
+        
+        let hsl;
+        let lightnessOffset;
+        const centerColorIndex = Math.round(.5 * subPalette.length);
+
+        for (let i = 0; i < subPalette.length; i++) {
+            // Leave the selected color alone
+            if (subPalette[i].name === props.selectedColor.name) {
+                continue;
+            }
+
+            // Make the lighter a little lighter and the darker a little darker
+            lightnessOffset = i < centerColorIndex ? -.8 * (centerColorIndex - i) : .3;
+            hsl = {
+                h: rootHsl.h,
+                s: rootHsl.s,
+                l: Math.round((i + 1) * (lightnessIncrement + lightnessOffset)),
+            };
+
+            color.set(hsl);
+            subPalette[i].color = color.hexString;
+        }
+
+        const updatedPalette = {...colorPalette};
+        updatedPalette[props.selectedPaletteName] = subPalette;
+        setColorPalette(updatedPalette);
+    };
+
     const colorIsSelected = () => {
-        const selectedColor = colorPalette[props.selectedPaletteName].find(color => color.selected === true);
-        return selectedColor !== undefined;
+        // Name prop of default color used when color is not selected is null -- that's how we tell a color isn't selected
+        return props.selectedColor.name !== null;
     };
 
     const getBtnClass = (btnContext) => {
@@ -259,7 +300,10 @@ function PaletteViewer(props) {
                             undo
                         </span>
                     </div>
-                    <div className={getBtnClass('info')}>
+                    <div 
+                        className={getBtnClass('info')}
+                        onClick={explodeSelectedPalette}
+                    >
                         Explode
                     </div>
                     {getEditorModeBtn()}
@@ -443,6 +487,7 @@ function PaletteEditor() {
                     <div className="editor-section">
                         <PaletteViewer
                             selectedPaletteName={selectedPaletteName}
+                            selectedColor={selectedColor}
                             setSelectedColor={setSelectedColor}
                             resetSelectedColor={resetSelectedColor}
                             editorMode={editorMode}

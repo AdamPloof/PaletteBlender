@@ -15,6 +15,10 @@ function getAverageHueAndSaturation(palette) {
     });
     unlockedColors = unlockedColors.map(color => color.color);
 
+    if (unlockedColors.length === 0) {
+        return [180, 50, 50];
+    }
+
     const avgHue = unlockedColors.reduce((prevVal, currentVal) => {
         const currentColor = new iro.Color(currentVal);
         return currentColor.hsl.h + prevVal;
