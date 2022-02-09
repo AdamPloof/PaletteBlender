@@ -208,7 +208,21 @@ function PaletteViewer(props) {
 
         return editorBtn;
     };
-    
+
+    const colorIsSelected = () => {
+        const selectedColor = colorPalette[props.selectedPaletteName].find(color => color.selected === true);
+        return selectedColor !== undefined;
+    };
+
+    const getBtnClass = (btnContext) => {
+        let btnClass = `btn btn-outline-${btnContext}`;
+        if (!colorIsSelected()) {
+            btnClass += ' disabled';
+        }
+
+        return btnClass;
+    };
+
     return (
         <div className="palette-viewer">
             <div className="viewer-section-top">
@@ -226,7 +240,7 @@ function PaletteViewer(props) {
                 <div className="color-options">
                     {/* <div className="btn-btn-info"></div> */}
                     <div 
-                        className="btn btn-outline-light"
+                        className={getBtnClass('light')}
                         onClick={() => {
                             if (!selectedColor) {
                                 return;
@@ -237,7 +251,7 @@ function PaletteViewer(props) {
                     >
                         <i className='material-icon-outline'>{getLockBtnIcon()}</i>
                     </div>
-                    <div className="btn btn-outline-light" 
+                    <div className={getBtnClass('light')} 
                         onClick={props.resetSelectedColor}
                         style={{display: 'flex'}}
                     >
@@ -245,7 +259,7 @@ function PaletteViewer(props) {
                             undo
                         </span>
                     </div>
-                    <div className="btn btn-outline-info">
+                    <div className={getBtnClass('info')}>
                         Explode
                     </div>
                     {getEditorModeBtn()}
