@@ -7,6 +7,7 @@ import Navbar from './nav/Navbar';
 import SubNav from './nav/SubNav';
 import BreadCrumbNav from './nav/BreadCrumbNav';
 import ContentContainer from './content/ContentContainer';
+import Sidebar from './content/Sidebar';
 import PaletteEditor from './paletteInterface/PaletteEditor';
 
 const ThemedContent = () => {
@@ -21,7 +22,10 @@ const ThemedContent = () => {
             <Navbar colorPalette={colorPalette} />
             <SubNav colorPalette={colorPalette} />
             <BreadCrumbNav colorPalette={colorPalette} />
-            <ContentContainer colorPalette={colorPalette} />
+            <div className="content-wrapper">
+                <ContentContainer colorPalette={colorPalette} />
+                <Sidebar colorPalette={colorPalette} />
+            </div>
         </React.Fragment>
     );
 }
