@@ -387,10 +387,7 @@ input[type=text] {
 
     &:focus {
         color: #212529;
-        background-color: #fff;
-        border-color: #86b7fe;
         outline: 0;
-        box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
     }
 }
 
@@ -421,6 +418,8 @@ $sidebar-card-padding: .5rem 1rem;
         align-items: center;
         border-bottom: 1px solid $grey-light;
         padding: $sidebar-card-padding;
+        border-top-left-radius: .5rem;
+        border-top-right-radius: .5rem;
     }
 
     .card-toolbar {
@@ -439,11 +438,17 @@ $sidebar-card-padding: .5rem 1rem;
         flex-direction: column;
 
         .list-item {
+            display: flex;
+            flex-direction: row;
             padding: $sidebar-card-padding;
             border-top: 1px solid $grey-light;
 
             &:first-of-type {
                 border-top: none;
+            }
+
+            .list-item-details {
+                margin-left: 1rem;
             }
 
             .detail-context {
