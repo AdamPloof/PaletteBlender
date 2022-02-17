@@ -6,16 +6,28 @@ const baseLogoStyle = {
     borderRadius: '50%',
     textAlign: 'center',
     padding: '.5rem',
-    minHeight: '20px',
-    minWidth: '20px',
-    lineHeight: '20px',
+    minHeight: '24px',
+    minWidth: '24px',
+    lineHeight: '24px',
     alignSelf: 'center',
 };
+
+const listItemIcons = [
+    'filter_vintage',
+    'healing',
+    'inventory',
+    'roller_skating',
+    'science',
+];
 
 const usesidebarClasses = createUseStyles({
     sidebarHeader: {
         backgroundColor: (colorPalette) => colorPalette.primary[2].color,
         color: (colorPalette) => colorPalette.greys[8].color,
+    },
+    toolbarForm: {
+        display: 'flex',
+        backgroundColor: (colorPalette) => colorPalette.greys[7].color,
     },
     sidebarInput : {
         "&:active": {
@@ -59,12 +71,24 @@ const usesidebarClasses = createUseStyles({
     },
 });
 
-const makeListItem = (title, details, logoClass) => {
+function getRandomIcon() {
+    return (
+        <span className="material-icon-outline">{listItemIcons[Math.floor(Math.random() * listItemIcons.length)]}</span>
+    );
+}
+
+function getCalendarIcon() {
+    return (
+        <span className="material-icon-outline">calendar_today</span>
+    );
+}
+
+const makeListItem = (title, details, logoClass, randIcon = true) => {
     const uid = generateUID();
 
     return (
         <div key={uid} className="list-item">
-            <div className={logoClass}>&amp;</div>
+            <div className={logoClass}>{randIcon === false ? getCalendarIcon() : getRandomIcon()}</div>
             <div className="list-item-details">
                 <div className="detail-title">
                     {title}
@@ -156,12 +180,12 @@ function Sidebar(props) {
             {/* Primary-dark cards */}
             <div className="sidebar-card">
                 <div className={sidebarClasses.sidebarHeader + " card-header"}>
-                    <div className="card-logo">&amp;</div>
+                    <div className="card-logo"><span className="material-icon-outline">calendar_month</span></div>
                     <div className="card-title"><h3>UPCOMMING EVENTS</h3></div>
                 </div>
                 <div className="card-body">
                     <div className="card-list">
-                        {primaryListItems.map(li => makeListItem(...Object.values(li)))}
+                        {primaryListItems.map(li => makeListItem(...Object.values(li), false))}
                     </div>
                 </div>
             </div>
@@ -169,10 +193,10 @@ function Sidebar(props) {
             {/* Rainbow Cards */}
             <div className="sidebar-card">
                 <div className={sidebarClasses.sidebarHeader + " card-header"}>
-                    <div className="card-logo">&amp;</div>
+                    <div className="card-logo"><span className="material-icon-outline">auto_stories</span></div>
                     <div className="card-title"><h3>FARCICAL READING</h3></div>
                 </div>
-                <div className="card-toolbar">
+                <div className={"card-toolbar " + sidebarClasses.toolbarForm}>
                     <div className="toolbar-input">
                         <input class={sidebarClasses.sidebarInput} type="text" placeholder="Search for stuff..." onClick={(e) => {e.preventDefault()}} />
                     </div>

@@ -7,7 +7,7 @@
     margin-right: auto;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 4rem 2rem 4rem 4rem;
     transition: margin-bottom .4s ease-in-out;
     width: 80%;
 }
@@ -396,7 +396,7 @@ input[type=text] {
     display: flex;
     flex-direction: column;
     width: 20%;
-    padding: 2rem;
+    padding: 4rem 4rem 4rem 2rem;
 }
 
 $sidebar-card-padding: .5rem 1rem;
@@ -417,9 +417,21 @@ $sidebar-card-padding: .5rem 1rem;
         flex-direction: row;
         align-items: center;
         border-bottom: 1px solid $grey-light;
-        padding: $sidebar-card-padding;
+        padding: 1rem;
         border-top-left-radius: .5rem;
         border-top-right-radius: .5rem;
+
+        h3 {
+            margin: 0;
+        }
+
+        .card-logo {
+            margin-right: 1rem;
+        }
+
+        .material-icon-outline {
+            font-size: 28px;
+        }
     }
 
     .card-toolbar {
@@ -452,7 +464,13 @@ $sidebar-card-padding: .5rem 1rem;
             }
 
             .detail-context {
-                font-size: 90%;
+                font-size: 85%;
+            }
+
+            .material-icon-outline {
+                position: relative;
+                top: 2px;
+                font-size: 20px;
             }
         }
     }
