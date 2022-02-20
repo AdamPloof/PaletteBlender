@@ -12,14 +12,6 @@ const baseLogoStyle = {
     alignSelf: 'center',
 };
 
-const listItemIcons = [
-    'filter_vintage',
-    'healing',
-    'inventory',
-    'roller_skating',
-    'science',
-];
-
 const usesidebarClasses = createUseStyles({
     sidebarHeader: {
         backgroundColor: (colorPalette) => colorPalette.primary[2].color,
@@ -71,24 +63,18 @@ const usesidebarClasses = createUseStyles({
     },
 });
 
-function getRandomIcon() {
+function getListIcon(icon) {
     return (
-        <span className="material-icon-outline">{listItemIcons[Math.floor(Math.random() * listItemIcons.length)]}</span>
+        <span className="material-icon-outline">{icon}</span>
     );
 }
 
-function getCalendarIcon() {
-    return (
-        <span className="material-icon-outline">calendar_today</span>
-    );
-}
-
-const makeListItem = (title, details, logoClass, randIcon = true) => {
+const makeListItem = (title, details, logoClass, icon) => {
     const uid = generateUID();
 
     return (
         <div key={uid} className="list-item">
-            <div className={logoClass}>{randIcon === false ? getCalendarIcon() : getRandomIcon()}</div>
+            <div className={logoClass}>{getListIcon(icon)}</div>
             <div className="list-item-details">
                 <div className="detail-title">
                     {title}
@@ -109,69 +95,82 @@ function Sidebar(props) {
             title: 'Relevant Info Report',
             details: 'T. Fergusson - 172 Views',
             logoClass: sidebarClasses.logoPrimary,
+            icon: 'filter_vintage',
         },
         {
             title: 'Goodbye Presentation',
             details: 'Emmanuel Lasker - 12k Views',
             logoClass: sidebarClasses.logoSuccess,
+            icon: 'inventory',
         },
         {
             title: 'Tour Dates by City',
             details: 'David St. Nubbins - 5 Views',
             logoClass: sidebarClasses.logoPrimary,
+            icon: 'inventory',
         },
         {
             title: 'Marching Band Expenses',
             details: 'B.D. Tubatone - 245 Views',
             logoClass: sidebarClasses.logoWarning,
+            icon: 'filter_vintage',
         },
         {
             title: 'Collect Call Policy',
             details: 'AT-5000 Auto-Dialer - 17m Views',
             logoClass: sidebarClasses.logoInfo,
+            icon: 'science',
         },
         {
             title: 'Old Timey Maps',
             details: 'Daniel Kern - 1.5k Views',
             logoClass: sidebarClasses.logoDanger,
+            icon: 'roller_skating',
         },
         {
             title: 'Figments of Imagination',
             details: 'Tracy Waterville - 458 Views',
             logoClass: sidebarClasses.logoDanger,
+            icon: 'healing',
         },
         {
             title: 'Get Outdoors Study',
             details: 'Tina - 12b Views',
             logoClass: sidebarClasses.logoSuccess,
+            icon: 'science',
         },
         {
             title: 'Next Tuesday',
             details: 'Wednesday Topper - 11 Views',
             logoClass: sidebarClasses.logoPrimary,
+            icon: 'healing',
         },
     ];
-    
+
     const primaryListItems = [
         {
             title: 'Solar Eclipse BBBQ',
             details: "The extra 'b' is for BYOBB. What's that extra...",
             logoClass: sidebarClasses.logoPrimaryDark,
+            icon: 'calendar_today',
         },
         {
             title: 'Collective Cooperation Conference',
             details: 'Register in advance to be entered into a raffle to win...',
             logoClass: sidebarClasses.logoPrimaryDark,
+            icon: 'calendar_today',
         },
         {
             title: 'WoM OT PA FWIW Meeting',
             details: 'Little of significance will be discussed, attendance mandatory...',
             logoClass: sidebarClasses.logoPrimaryDark,
+            icon: 'calendar_today',
         },
         {
             title: 'Color Palette Creation Workshop',
             details: 'No longer needed thanks to an awesome new...',
             logoClass: sidebarClasses.logoPrimaryDark,
+            icon: 'calendar_today',
         },
     ];
 
@@ -198,7 +197,7 @@ function Sidebar(props) {
                 </div>
                 <div className={"card-toolbar " + sidebarClasses.toolbarForm}>
                     <div className="toolbar-input">
-                        <input class={sidebarClasses.sidebarInput} type="text" placeholder="Search for stuff..." onClick={(e) => {e.preventDefault()}} />
+                        <input className={sidebarClasses.sidebarInput} type="text" placeholder="Search for stuff..." onClick={(e) => {e.preventDefault()}} />
                     </div>
                 </div>
                 <div className="card-body">
