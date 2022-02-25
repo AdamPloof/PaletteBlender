@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { PalletteProvider, PaletteContext } from './PaletteContext';
 
@@ -9,6 +9,7 @@ import BreadCrumbNav from './nav/BreadCrumbNav';
 import ContentContainer from './content/ContentContainer';
 import Sidebar from './content/Sidebar';
 import PaletteEditor from './paletteInterface/PaletteEditor';
+import Toolbox from './paletteInterface/Toolbox';
 
 const ThemedContent = () => {
     const [ colorPalette ] = useContext(PaletteContext);
@@ -31,10 +32,13 @@ const ThemedContent = () => {
 }
 
 function App() {
+    const [ showToolbox, setShowToolbox ] = useState(false);
+
     return (
         <PalletteProvider>
             <ThemedContent />
-            <PaletteEditor />
+            <PaletteEditor setShowToolbox={setShowToolbox} />
+            <Toolbox showToolbox={showToolbox} setShowToolbox={setShowToolbox} />
         </PalletteProvider>
     );
 };

@@ -71,7 +71,8 @@ function SubPaletteSelector(props) {
                     {getColorOptions()}
                 </select>
                 <div className="section-options">
-                    <div className="btn btn-info">CSS Tools</div>
+                    {/* TODO: This button will eventually move to PaletteEditor header as separate import/export buttons */}
+                    <div className="btn btn-info" onClick={() => {props.setShowToolbox(true)}}>CSS Tools</div>
                     <div className="btn btn-light" onClick={props.resetSelectedSubPalette}>
                         Reset
                     </div>
@@ -319,7 +320,7 @@ function PaletteViewer(props) {
     );
 }
 
-function PaletteEditor() {
+function PaletteEditor(props) {
     const [ visibility, setVisibility ] = useState('hide');
     const [ colorPalette, setColorPalette ] = useContext(PaletteContext);
 
@@ -482,6 +483,7 @@ function PaletteEditor() {
                             setSelectedPaletteName={setSelectedPaletteName}
                             resetSelectedSubPalette={resetSelectedSubPalette}
                             colorPalette={colorPalette}
+                            setShowToolbox={props.setShowToolbox}
                         />
                     </div>
                     <div className="editor-section">
