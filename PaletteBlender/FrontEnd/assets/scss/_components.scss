@@ -485,10 +485,63 @@ $sidebar-card-padding: .5rem 1rem;
     top: 0;
     overflow: auto;
     z-index: 1;
-    background-color: $black;
-    opacity: .4;
+    background-color: rgba(0, 0, 0, .3);
 
     &.show {
         display: block;
     }
+
+}
+
+.modal-wrapper {
+    max-width: 50%;
+    margin: 1.75rem auto;
+    opacity: 1;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    background-color: $grey-darkerer;
+    border: 1px solid $danger-darker;
+    color: $info-lightest;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    display: flex;
+    align-items: center;
+    padding: 1rem .75rem;
+}
+
+.modal-header {
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid $grey-dark;
+    color: $info-lighter;
+
+    h3 {
+        margin-bottom: 0;
+    }
+
+    .modal-close {
+        font-size: 150%;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+            color: $info-lightest;
+        }
+    }
+}
+
+.modal-body {
+    flex-direction: row;
+    border-bottom: 1px solid $grey-dark;
+}
+
+.modal-footer {
+    flex-direction: row;
+    justify-content: flex-end;
 }

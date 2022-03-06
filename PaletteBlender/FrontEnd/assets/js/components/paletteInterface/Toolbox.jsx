@@ -1,24 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 export default function Toolbox(props) {
-    useEffect(() => {
-        if (props.showToolbox) {
-            if (!document.body.classList.contains('noscroll')) {
-                document.body.classList.add('noscroll');
-            }
-        } else {
-            document.body.classList.remove('noscroll');
+    const hideToolbox = () => {
+        props.toolboxModal.current.classList.remove('show');
+
+        if (!props.toolboxModal.current.classList.contains('hide')) {
+            props.toolboxModal.current.classList.add('hide');
         }
-    }, [props.showToolbox]);
+    };
 
     return (
-        <div id="toolbox-modal" className={props.showToolbox ? "modal show" : "modal"}>
-            <div className="modal-content">
-                <div className="modal-header">
-                    <span className="modal-close">&times;</span>
-                </div>
-                <div className="modal-body">
-                    <p>Modal test</p>
+        <div id="toolbox-modal" className="modal hide" ref={props.toolboxModal}>
+            <div className="modal-wrapper">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <div className="modal-title"><h3>CSS Toolbox</h3></div>
+                        <span className="modal-close" onClick={hideToolbox}>&times;</span>
+                    </div>
+                    <div className="modal-body">
+                        <p>Modal test</p>
+                    </div>
+                    <div className="modal-footer">
+                        <div className="btn btn-dark" onClick={hideToolbox}>Close</div>
+                    </div>
                 </div>
             </div>
         </div>

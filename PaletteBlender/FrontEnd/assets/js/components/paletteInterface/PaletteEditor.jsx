@@ -55,6 +55,14 @@ function SubPaletteSelector(props) {
         );
     }
 
+    const showToolbox = () => {
+        props.toolboxModal.current.classList.remove('hide');
+
+        if (!props.toolboxModal.current.classList.contains('show')) {
+            props.toolboxModal.current.classList.add('show');
+        }
+    };
+
     return (
         <div className="palette-selector">
             <div className="selector-input">
@@ -72,7 +80,7 @@ function SubPaletteSelector(props) {
                 </select>
                 <div className="section-options">
                     {/* TODO: This button will eventually move to PaletteEditor header as separate import/export buttons */}
-                    <div className="btn btn-info" onClick={() => {props.setShowToolbox(true)}}>CSS Tools</div>
+                    <div className="btn btn-info" onClick={showToolbox}>CSS Tools</div>
                     <div className="btn btn-light" onClick={props.resetSelectedSubPalette}>
                         Reset
                     </div>
@@ -483,7 +491,7 @@ function PaletteEditor(props) {
                             setSelectedPaletteName={setSelectedPaletteName}
                             resetSelectedSubPalette={resetSelectedSubPalette}
                             colorPalette={colorPalette}
-                            setShowToolbox={props.setShowToolbox}
+                            toolboxModal={props.toolboxModal}
                         />
                     </div>
                     <div className="editor-section">

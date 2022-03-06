@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
 import { PalletteProvider, PaletteContext } from './PaletteContext';
 
@@ -32,13 +32,13 @@ const ThemedContent = () => {
 }
 
 function App() {
-    const [ showToolbox, setShowToolbox ] = useState(false);
+    const toolboxModal = useRef(null);
 
     return (
         <PalletteProvider>
             <ThemedContent />
-            <PaletteEditor setShowToolbox={setShowToolbox} />
-            <Toolbox showToolbox={showToolbox} setShowToolbox={setShowToolbox} />
+            <PaletteEditor toolboxModal={toolboxModal} />
+            <Toolbox toolboxModal={toolboxModal} />
         </PalletteProvider>
     );
 };
