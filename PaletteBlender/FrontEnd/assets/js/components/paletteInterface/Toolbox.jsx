@@ -35,6 +35,16 @@ function convertPaletteToCSS(colorPalette) {
     return css;
 }
 
+async function copyCssToClipboard(css) {
+    let copyStatus = await navigator.clipboard.writeText(css).then(() => {
+        return true;
+    }, () => {
+        return false;
+    });
+    
+    return copyStatus;
+}
+
 export default function Toolbox(props) {
     const [ colorPalette ] = useContext(PaletteContext);
 
@@ -44,6 +54,12 @@ export default function Toolbox(props) {
         if (!props.toolboxModal.current.classList.contains('hide')) {
             props.toolboxModal.current.classList.add('hide');
         }
+    };
+
+    const copyCss = async () => {
+        const css = props.toolboxModal.current.querySelector('.stylesheet-output').querySelector('code').textContent;
+        const copyStatus = await copyCssToClipboard(css);
+        console.log(copyStatus);
     };
 
     const getOutputSheet = () => {
@@ -68,6 +84,12 @@ export default function Toolbox(props) {
                         <span className="modal-close" onClick={hideToolbox}>&times;</span>
                     </div>
                     <div className="modal-body">
+                        <div className="toolbox-options">
+                            <div className="btn btn-sm btn-info" onClick={copyCss}>
+                                {/* Manually postioning the text and the icon is annoying, but the icon seems to offset the text and vice versa and so just going with this for now */}
+                                <span className="material-icon-outline" style={{position: "relative", top: "3px"}}>content_copy</span><span style={{position: "relative", top: "-3px"}}>Copy</span>
+                            </div>
+                        </div>
                         {getOutputSheet()}
                     </div>
                     <div className="modal-footer">

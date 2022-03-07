@@ -36,7 +36,6 @@
 	text-align: center;
 	text-decoration: none;
 	vertical-align: middle;
-	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -536,13 +535,21 @@ $sidebar-card-padding: .5rem 1rem;
 }
 
 .modal-body {
-    flex-direction: row;
+    flex-direction: column;
     border-bottom: 1px solid $grey-dark;
 }
 
 .modal-footer {
     flex-direction: row;
     justify-content: flex-end;
+}
+
+.toolbox-options{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-bottom: .75rem;
 }
 
 .stylesheet-output {
