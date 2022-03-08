@@ -1,5 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PaletteContext } from "../PaletteContext";
+import { usePopper } from 'react-popper';
+import { popper } from "@popperjs/core";
 
 function formatColorName(colorName) {
     let formattedColorName = '';
@@ -48,6 +50,40 @@ async function copyCssToClipboard(css) {
 export default function Toolbox(props) {
     const [ colorPalette ] = useContext(PaletteContext);
 
+    const [ tooltipVisible, setTooltipVisible ] = useState(false);
+    const [ tooltipMsg, setTooltipMsg ] = useState('Copy CSS to clipboard');
+    const [ copyBtn, setCopyBtn ] = useState(null);
+    const [ popperElement, setPopperElement ] = useState(null);
+    const [ arrowElement, setArrowElement ] = useState(null);
+    const { styles, attributes, update } = usePopper(copyBtn, popperElement, {
+        placement: 'top',
+        modifiers: [
+            {
+                name: 'arrow', 
+                options: {
+                    element: arrowElement,
+                }
+            },
+            {
+                name: 'offset', 
+                options: {
+                    offset: [0, 8]
+                }
+            },
+
+        ],
+    });
+
+    const showTooltip = () => {
+        setTooltipVisible(true);
+        update();
+    };
+
+    const hideTooltip = () => {
+        setTooltipVisible(false);
+        update();
+    };
+
     const hideToolbox = () => {
         props.toolboxModal.current.classList.remove('show');
 
@@ -59,7 +95,16 @@ export default function Toolbox(props) {
     const copyCss = async () => {
         const css = props.toolboxModal.current.querySelector('.stylesheet-output').querySelector('code').textContent;
         const copyStatus = await copyCssToClipboard(css);
-        console.log(copyStatus);
+
+        // Flash a Copied message for a couple seconds after copying.
+        // TOOD: Display couldn't copy message if the copy status returns a failure
+        setTooltipMsg('Copied!');
+        setTooltipVisible(true);
+        update();
+        setTimeout(() => {
+            setTooltipVisible(false);
+            setTooltipMsg('Copy CSS to clipboard');
+        }, 1500);
     };
 
     const getOutputSheet = () => {
@@ -85,9 +130,19 @@ export default function Toolbox(props) {
                     </div>
                     <div className="modal-body">
                         <div className="toolbox-options">
-                            <div className="btn btn-sm btn-info" onClick={copyCss}>
-                                {/* Manually postioning the text and the icon is annoying, but the icon seems to offset the text and vice versa and so just going with this for now */}
-                                <span className="material-icon-outline" style={{position: "relative", top: "3px"}}>content_copy</span><span style={{position: "relative", top: "-3px"}}>Copy</span>
+                            <div className="btn btn-sm btn-info" 
+                                onClick={copyCss}
+                                ref={setCopyBtn}
+                                onMouseEnter={showTooltip}
+                                onFocus={showTooltip}
+                                onMouseLeave={hideTooltip}
+                                onBlur={hideTooltip}
+                            >
+                                Copy
+                            </div>
+                            <div className={tooltipVisible ? "tooltip show" : "tooltip"} ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+                                {tooltipMsg}
+                                <div className="tooltip-arrow" ref={setArrowElement} style={styles.arrow} />
                             </div>
                         </div>
                         {getOutputSheet()}
