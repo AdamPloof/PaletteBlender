@@ -31,6 +31,13 @@ const usesidebarClasses = createUseStyles({
             boxShadow: (colorPalette) => "0 0 0 0.25rem " + colorPalette.primary[6].color,
         }
     },
+    listItemHover: {
+        backgroundColor: (colorPalette) => colorPalette.greys[8].color,
+        cursor: 'pointer',
+        '&:hover':  {
+            backgroundColor: (colorPalette) => colorPalette.greys[7].color,
+        },
+    },
     logoPrimaryDark: {
         backgroundColor: (colorPalette) => colorPalette.primary[2].color,
         color: (colorPalette) => colorPalette.greys[8].color,
@@ -69,11 +76,11 @@ function getListIcon(icon) {
     );
 }
 
-const makeListItem = (title, details, logoClass, icon) => {
+const makeListItem = (title, details, logoClass, icon, listItemClass) => {
     const uid = generateUID();
 
     return (
-        <div key={uid} className="list-item">
+        <div key={uid} className={'list-item ' + listItemClass}>
             <div className={logoClass}>{getListIcon(icon)}</div>
             <div className="list-item-details">
                 <div className="detail-title">
@@ -184,7 +191,7 @@ function Sidebar(props) {
                 </div>
                 <div className="card-body">
                     <div className="card-list">
-                        {primaryListItems.map(li => makeListItem(...Object.values(li), false))}
+                        {primaryListItems.map(li => makeListItem(...Object.values(li), sidebarClasses.listItemHover))}
                     </div>
                 </div>
             </div>
@@ -202,7 +209,7 @@ function Sidebar(props) {
                 </div>
                 <div className="card-body">
                     <div className="card-list">
-                        {rainbowListItems.map(li => makeListItem(...Object.values(li)))}
+                        {rainbowListItems.map(li => makeListItem(...Object.values(li), sidebarClasses.listItemHover))}
                     </div>
                 </div>
             </div>

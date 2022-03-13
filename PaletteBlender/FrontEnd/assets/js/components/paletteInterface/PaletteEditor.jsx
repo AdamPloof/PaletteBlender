@@ -80,7 +80,7 @@ function SubPaletteSelector(props) {
                 </select>
                 <div className="section-options">
                     {/* TODO: This button will eventually move to PaletteEditor header as separate import/export buttons */}
-                    <div className="btn btn-info" onClick={showToolbox}>CSS Tools</div>
+                    <div className="btn btn-info" onClick={showToolbox}>Export CSS</div>
                     <div className="btn btn-light" onClick={props.resetSelectedSubPalette}>
                         Reset
                     </div>

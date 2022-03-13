@@ -8,13 +8,15 @@
 
 .form-group {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
 
     &.form-inline {
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
     }
 }
 

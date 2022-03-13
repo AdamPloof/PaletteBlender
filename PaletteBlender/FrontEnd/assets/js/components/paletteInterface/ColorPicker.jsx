@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import iro from '@jaames/iro';
 
 import { basePalette } from '../basePalette';
@@ -9,17 +9,46 @@ class ColorPicker extends Component {
         this.state = {
             rgbString: null,
             hexString: null,
+            widgetType: 'wheel',
         };
 
+        this.colorPickerContainer = React.createRef();
         this.colorPicker = null;
+        this.setWidgetType = this.setWidgetType.bind(this);
     }
 
     componentDidMount() {
-        this.colorPicker = new iro.ColorPicker(document.getElementById('color-picker'), {
+        this.setColorPicker();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.selectedColor.name !== prevProps.selectedColor.name) {
+            this.colorPicker.color.hexString = this.props.selectedColor.color;
+        }
+
+        if (this.props.selectedColor.color !== prevProps.selectedColor.color) {
+            this.colorPicker.color.hexString = this.props.selectedColor.color;
+        }
+
+        if (this.state.widgetType !== prevState.widgetType) {
+            this.removeColorPicker();
+            this.setColorPicker();
+        }
+    }
+
+    removeColorPicker() {
+        while (this.colorPickerContainer.current.lastChild) {
+            this.colorPickerContainer.current.removeChild(this.colorPickerContainer.current.lastChild);
+        }
+    }
+
+    setColorPicker() {
+        this.colorPicker = new iro.ColorPicker(this.colorPickerContainer.current, {
             // Setting initial color to white for now, should probably set it to whatever primary is though
             color: this.props.selectedColor.color,
-            width: 130,
-            borderColor: basePalette.greys[4].color
+            width: this.state.widgetType === 'hsv' ? 200 : 130,
+            borderColor: basePalette.greys[4].color,
+            layout: this.getColorPickerWidget(),
         }); 
 
         this.colorPicker.on(['color:init', 'color:change'], (color) => {
@@ -47,14 +76,81 @@ class ColorPicker extends Component {
         });
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props.selectedColor.name !== prevProps.selectedColor.name) {
-            this.colorPicker.color.hexString = this.props.selectedColor.color;
+    setWidgetType(e) {
+        this.setState({
+            widgetType: e.target.value,
+        });
+    }
+
+    getColorPickerWidget() {
+        let widget;
+        switch (this.state.widgetType) {
+            case 'wheel':
+                widget = [
+                    {
+                        component: iro.ui.Wheel,
+                        options: {}
+                    },
+                    { 
+                        component: iro.ui.Slider,
+                        options: {
+                          sliderType: 'value'
+                        }
+                    },
+                ];
+                break;
+            case 'box':
+                widget = [
+                    {
+                        component: iro.ui.Box,
+                        options: {}
+                    },
+                    { 
+                        component: iro.ui.Slider,
+                        options: {
+                          sliderType: 'value'
+                        }
+                    },
+                ];
+                break;
+            case 'hsv':
+                widget = [
+                    { 
+                        component: iro.ui.Slider,
+                        options: {
+                            sliderType: 'hue'
+                        }
+                    },
+                    { 
+                        component: iro.ui.Slider,
+                        options: {
+                            sliderType: 'saturation'
+                        }
+                    },
+                    { 
+                        component: iro.ui.Slider,
+                        options: {
+                            sliderType: 'value'
+                        }
+                    },
+                ];
+                break;
+            default:
+                widget = widget = [
+                    {
+                        component: iro.ui.Wheel,
+                        options: {}
+                    },
+                    { 
+                        component: iro.ui.Slider,
+                        options: {
+                          sliderType: 'value'
+                        }
+                    },
+                ];
         }
 
-        if (this.props.selectedColor.color !== prevProps.selectedColor.color) {
-            this.colorPicker.color.hexString = this.props.selectedColor.color;
-        }
+        return widget;
     }
 
     updateColor(color) {
@@ -68,7 +164,17 @@ class ColorPicker extends Component {
         return (
             <div className="color-picker-widget">
                 <div className="color-selection-info">
-                    <div id="color-selection-blot" style={{backgroundColor: this.state.hexString}}></div>
+                    <div className="picker-options">
+                        <div className="form-group">
+                            <label htmlFor="pickerType">Widget Type</label>
+                            <select name="pickerType" id="pickerType" value={this.state.widgetType} onChange={this.setWidgetType}>
+                                <option value="wheel">Wheel</option>
+                                <option value="box">Box</option>
+                                <option value="hsv">HSV</option>
+                            </select>
+                        </div>
+                        <div id="color-selection-blot" style={{backgroundColor: this.state.hexString}}></div>
+                    </div>
                     <div className="color-values-container">
                         <div className="color-value-display">
                             <strong className="color-value-label">HEX:</strong> {this.state.hexString}
@@ -78,7 +184,7 @@ class ColorPicker extends Component {
                         </div>
                     </div>
                 </div>
-                <div id="color-picker" className={this.props.visibility == "show" ? "expanded" : "collapse"}></div>
+                <div id="color-picker" ref={this.colorPickerContainer} className={this.props.visibility == "show" ? "expanded" : "collapse"}></div>
             </div>
         );
     }
