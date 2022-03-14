@@ -18,6 +18,25 @@
         justify-content: space-between;
         align-items: center;
     }
+
+    &.color-picker-form {
+        label {
+            padding: .1rem .25rem .1rem 0;
+            color: $info-lighter;
+        }
+
+        input[type=text] {
+            background-color: $grey-darkerer;
+            border: none;
+            color: $info-lightest;
+            padding: .1 .25rem .1rem .5rem;
+
+            &:active,
+            &:focus {
+                background-color: $grey-darker;
+            }
+        }
+    }
 }
 
 // Range Input

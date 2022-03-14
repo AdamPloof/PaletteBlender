@@ -7,14 +7,15 @@ class ColorPicker extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rgbString: null,
-            hexString: null,
+            rgbString: 'rgb(255, 255, 255)',
+            hexString: '#ffffff',
             widgetType: 'wheel',
         };
 
         this.colorPickerContainer = React.createRef();
         this.colorPicker = null;
         this.setWidgetType = this.setWidgetType.bind(this);
+        this.manuallyUpdateColor = this.manuallyUpdateColor.bind(this);
     }
 
     componentDidMount() {
@@ -57,23 +58,27 @@ class ColorPicker extends Component {
 
         // NOTE: if color updating is slow or clunky on input:change we can try input:end to reduce the amount of updates.
         this.colorPicker.on('input:change', (color) => {
-            if (this.props.selectedColor.locked === true) {
-                return;
-            }
-            
-            const subPalette = this.props.colorPalette[this.props.selectedPaletteName].map(colorObj => {
-                if (colorObj.name === this.props.selectedColor.name) {
-                    colorObj.color = color.hexString;
-                    this.props.setSelectedColor({...colorObj});
-                }
-
-                return colorObj;
-            });
-
-            const updatedPalette = {...this.props.colorPalette};
-            updatedPalette[this.props.selectedPaletteName] = subPalette;
-            this.props.setColorPalette(updatedPalette);
+            this.updateSelectedColor(color.hexString);
         });
+    }
+    
+    updateSelectedColor(hexString) {
+        if (this.props.selectedColor.locked === true) {
+            return;
+        }
+        
+        const subPalette = this.props.colorPalette[this.props.selectedPaletteName].map(colorObj => {
+            if (colorObj.name === this.props.selectedColor.name) {
+                colorObj.color = hexString;
+                this.props.setSelectedColor({...colorObj});
+            }
+    
+            return colorObj;
+        });
+    
+        const updatedPalette = {...this.props.colorPalette};
+        updatedPalette[this.props.selectedPaletteName] = subPalette;
+        this.props.setColorPalette(updatedPalette);
     }
 
     setWidgetType(e) {
@@ -153,6 +158,29 @@ class ColorPicker extends Component {
         return widget;
     }
 
+    manuallyUpdateColor(e) {
+        let regex;
+        let hexString;
+        if (e.target.id === 'hexInput') {
+            hexString = e.target.value
+            this.setState({ hexString });
+            // Hex string pattern
+            regex = /^#(?:[0-9a-fA-F]{3}){1,2}$/;
+        } else {
+            // Since updateSelectedColor only takes a hex string, we need to convert the rgb value to hex
+            hexString = new iro.Color(e.target.value).hexString;
+            this.setState({
+                rgbString: e.target.value,
+            });
+            // RGB string pattern
+            regex = /^(rgb\()([0-9]{1,3}, ){2}([0-9]{1,3}\))$/;
+        }
+
+        if (null !== e.target.value.match(regex)) {
+            this.updateSelectedColor(hexString);
+        }
+    }
+
     updateColor(color) {
         this.setState({
             hexString: color.hexString,
@@ -173,14 +201,35 @@ class ColorPicker extends Component {
                                 <option value="hsv">HSV</option>
                             </select>
                         </div>
+                        {/* TODO: this should use selectedColor or default instead of the hex string */}
                         <div id="color-selection-blot" style={{backgroundColor: this.state.hexString}}></div>
                     </div>
                     <div className="color-values-container">
                         <div className="color-value-display">
-                            <strong className="color-value-label">HEX:</strong> {this.state.hexString}
+                            {/* <strong className="color-value-label">HEX:</strong> {this.state.hexString} */}
+                            <div className="form-group form-inline color-picker-form">
+                                <label htmlFor="hexInput">HEX:</label>
+                                <input 
+                                    id="hexInput"
+                                    name="hexInput"
+                                    type="text"
+                                    value={this.state.hexString}
+                                    onChange={this.manuallyUpdateColor}
+                                />
+                            </div>
                         </div>
                         <div className="color-value-display">
-                        <strong className="color-value-label">RGB:</strong> {this.state.rgbString}
+                        {/* <strong className="color-value-label">RGB:</strong> {this.state.rgbString} */}
+                            <div className="form-group form-inline color-picker-form">
+                                <label htmlFor="rgbInput">RGB:</label>
+                                <input 
+                                    id="rgbInput"
+                                    name="rgbInput"
+                                    type="text"
+                                    value={this.state.rgbString}
+                                    onChange={this.manuallyUpdateColor}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
