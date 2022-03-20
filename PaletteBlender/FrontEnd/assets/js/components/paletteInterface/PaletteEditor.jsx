@@ -455,6 +455,8 @@ function PaletteEditor(props) {
                 <ShadeEditor 
                     selectedPaletteName={selectedPaletteName}
                     hslResetCounter={hslResetCounter}
+                    selectedColor={selectedColor}
+                    setSelectedColor={setSelectedColor}
                 />
             );
         }

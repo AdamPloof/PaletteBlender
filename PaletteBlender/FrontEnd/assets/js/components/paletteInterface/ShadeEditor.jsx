@@ -85,6 +85,8 @@ export default function ShadeEditor(props) {
         if (!userHasModifiedHSL) {
             setSlidersToAverageHSL();
             setInitialPalette(JSON.parse(JSON.stringify(colorPalette[props.selectedPaletteName])));
+        } else {
+            updateSelectedColor();
         }
     }, [colorPalette]);
 
@@ -108,6 +110,15 @@ export default function ShadeEditor(props) {
 
         setUserHasModifiedHSL(true);
         setInitialPalette(JSON.parse(JSON.stringify(colorPalette[props.selectedPaletteName])));
+    };
+
+    const updateSelectedColor = () => {
+        if (!props.selectedColor) {
+            return;
+        }
+
+        const updatedSelectedColor = colorPalette[props.selectedPaletteName].find(color => color.name === props.selectedColor.name);
+        props.setSelectedColor(updatedSelectedColor);
     };
 
     const adjustPaletteHSL = (e) => {

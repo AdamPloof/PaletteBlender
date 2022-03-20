@@ -30,9 +30,11 @@
             border: none;
             color: $info-lightest;
             padding: .1 .25rem .1rem .5rem;
+            cursor: pointer;
 
             &:active,
-            &:focus {
+            &:focus,
+            &:hover {
                 background-color: $grey-darker;
             }
         }
