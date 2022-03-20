@@ -22,10 +22,8 @@ function Navbar(props) {
     return (
         <div className="nav-container">
             <div className={"navbar nav-second " + classes.navbarMain}>
-                <div className="nav-left">
-                    <div className={"nav-logo " + classes.navLogoMain}>
-                        ~ PaletteBlender ~
-                    </div>
+                <div className={"nav-logo " + classes.navLogoMain}>
+                    ~ PaletteBlender ~
                 </div>
                 <div className="nav-center">
                     <div className="nav-list">
@@ -37,7 +35,7 @@ function Navbar(props) {
                                 <a className={"nav-link " + classes.navLinkMain} href="#">Docs</a>
                             </li>
                             <li>
-                                <a className={"nav-link " + classes.navLinkMain} href="#">Explore</a>
+                                <a className={"nav-link " + classes.navLinkMain} href="#">Guide</a>
                             </li>
                         </ul>    
                     </div>

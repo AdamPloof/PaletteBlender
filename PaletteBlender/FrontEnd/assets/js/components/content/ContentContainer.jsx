@@ -306,6 +306,23 @@ const useLinkStyles = createUseStyles({
     },
 });
 
+function IntroSection(props) {
+    const linkClasses = useLinkStyles(props.colorPalette);
+    const classes = useStyles(props.colorPalette);
+
+    return (
+        <div className="content-section">
+            <div className="col" style={{width: '75%'}}>
+                <h1>A Practical Color Palette Generator</h1>
+                <p>
+                    Palette Blender is a tool for efficiently designing color palettes for use in web development. It allows you to assess colors immediately in the context of common site components and
+                    export your palette directly to CSS/SASS variables for use in your project.
+                </p>
+            </div>
+        </div>
+    );
+}
+
 function ParagraphSection(props) {
     const linkClasses = useLinkStyles(props.colorPalette);
     const classes = useStyles(props.colorPalette);
@@ -313,7 +330,7 @@ function ParagraphSection(props) {
     return (
         <div className="content-section two-col">
             <div className="col">
-                <h1>A Story for Reading</h1>
+                <h2>Example Body Text</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                     <a href="#" className={linkClasses.linkStd}> Link: Quisque dictum</a> neque in magna laoreet molestie. Quisque ut orci elit. 
@@ -322,21 +339,19 @@ function ParagraphSection(props) {
                     <br/>
                     <small className={classes.muted}>Duis sed eros faucibus, pretium ligula id, vehicula sem.</small>
                 </p>
-                <p>
-                    Aenean et ante dui. Nullam sed quam nisi. Vestibulum felis neque, 
-                    tincidunt maximus <a href="#" className={linkClasses.linkStd}>Link: malesuada vitae</a>, mollis quis felis. In orci enim, pharetra 
-                    ut arcu et, posuere consequat ante. 
-                </p>
+                <blockquote>
+                    Anyone who sits on top of the <a target="_blank" href="https://en.wikipedia.org/wiki/Gemini_3#/media/File:Gemini_3.jpg" className={linkClasses.linkStd}>largest hydrogen-oxygen fueled system in the world</a>, knowing they're going to light the bottom, and doesn't get a little worried, does not fully understand the situation.
+                </blockquote>
+                <figcaption className={classes.muted}>-- John Young, <cite>On being blasted into space</cite></figcaption>
             </div>
             <div className="col">
             <div className="col">
-                <h1>Words of Info, Warning, and Danger</h1>
-                <p>Phasellus ornare lacinia sollicitudin.</p>
+                <h2>Contextual Messages</h2>
+                <p className={classes.muted}>Nullam sed quam nisi. Vestibulum felis neque, tincidunt maximus malesuada vitae, mollis quis felis.</p>
                 <p className={classes.success}>Pellentesque tristique neque faucibus urna scelerisque cursus rhoncus ac ipsum.</p>
                 <p className={classes.info}>In aliquet varius arcu, non aliquam urna.</p>
                 <p className={classes.warning}>Suspendisse eget sapien eget purus iaculis lacinia et nec elit.</p>
                 <p className={classes.danger}>Etiam ante odio, tempor vel cursus et, eleifend molestie quam.</p>
-                <p className={classes.muted}>Nullam sed quam nisi. Vestibulum felis neque, tincidunt maximus malesuada vitae, mollis quis felis.</p>
             </div>
             </div>
         </div>    
@@ -349,7 +364,7 @@ function ButtonSection(props) {
     return (
         <div className="content-section">
             <div className="col">
-                <h1>Buttons</h1>
+                <h2>Buttons</h2>
                 <div className="btn-container">
                     <div tabIndex={0} className={"btn " + classes.btnPrimary}>Primary</div>
                     {/* <div tabIndex={0} className={"btn " + classes.btn-secondary}>Secondary</div> */}
@@ -486,6 +501,7 @@ function AlertSection(props) {
 function ContentContainer(props) {
     return (
         <div className="content">
+            <IntroSection colorPalette={props.colorPalette} />
             <ParagraphSection colorPalette={props.colorPalette} />
             <ButtonSection colorPalette={props.colorPalette} />
             <AlertSection colorPalette={props.colorPalette} />

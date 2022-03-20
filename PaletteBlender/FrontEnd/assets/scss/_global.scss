@@ -32,6 +32,14 @@ a {
     text-decoration: none;
 }
 
+blockquote, figcaption {
+    margin-left: 2rem;
+}
+
+blockquote {
+    font-size: 1.1rem;
+}
+
 .material-icon-outline {
     font-family: 'Material Icons';
     font-weight: normal;

@@ -17,6 +17,7 @@ $sub-nav-height: 50px;
     }
 
     &.nav-second {
+        justify-content: center;
         min-height: 70px;
     }
 
@@ -77,6 +78,9 @@ $sub-nav-height: 50px;
 }
 
 .nav-logo {
+    left: 0;
+    margin-left: 4rem;
+    position: absolute;
     font-size: 150%;
     font-weight: 600;
 }

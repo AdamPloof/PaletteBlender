@@ -113,7 +113,7 @@ export default function ShadeEditor(props) {
     };
 
     const updateSelectedColor = () => {
-        if (!props.selectedColor) {
+        if (props.selectedColor.name === null) {
             return;
         }
 

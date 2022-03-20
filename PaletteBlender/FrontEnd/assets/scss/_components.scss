@@ -458,6 +458,11 @@ $sidebar-card-padding: .5rem 1rem;
                 border-top: none;
             }
 
+            &:last-of-type {
+                border-bottom-left-radius: .5rem;
+                border-bottom-right-radius: .5rem;
+            }
+
             .list-item-details {
                 margin-left: 1rem;
             }

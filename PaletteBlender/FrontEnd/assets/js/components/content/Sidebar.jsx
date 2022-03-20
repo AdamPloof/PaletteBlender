@@ -168,6 +168,12 @@ function Sidebar(props) {
             icon: 'calendar_today',
         },
         {
+            title: 'Meeting with the Bobs',
+            details: 'They called me in from home...',
+            logoClass: sidebarClasses.logoPrimaryDark,
+            icon: 'calendar_today',
+        },
+        {
             title: 'WoM OT PA FWIW Meeting',
             details: 'Little of significance will be discussed, attendance mandatory...',
             logoClass: sidebarClasses.logoPrimaryDark,
