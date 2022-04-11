@@ -29,13 +29,31 @@ function Navbar(props) {
                     <div className="nav-list">
                         <ul>
                             <li>
-                                <a className={"nav-link " + classes.navLinkMain} href="#">Home</a>
+                                <a
+                                    className={"nav-link " + classes.navLinkMain}
+                                    href="#"
+                                    onClick={() => {props.setCurrentPage('main')}}
+                                >
+                                    Home
+                                </a>
                             </li>
                             <li>
-                                <a className={"nav-link " + classes.navLinkMain} href="#">Docs</a>
+                                <a
+                                    className={"nav-link " + classes.navLinkMain}
+                                    href="#"
+                                    onClick={() => {props.setCurrentPage('documentation')}}
+                                >
+                                    Documentation
+                                </a>
                             </li>
                             <li>
-                                <a className={"nav-link " + classes.navLinkMain} href="#">Guide</a>
+                                <a
+                                    className={"nav-link " + classes.navLinkMain}
+                                    href="#"
+                                    onClick={() => {props.setCurrentPage('guide')}}
+                                >
+                                    Guide
+                                </a>
                             </li>
                         </ul>    
                     </div>

@@ -113,7 +113,7 @@ class ColorPicker extends Component {
                     { 
                         component: iro.ui.Slider,
                         options: {
-                          sliderType: 'value'
+                          sliderType: 'hue'
                         }
                     },
                 ];

@@ -24,8 +24,16 @@ body {
     padding: 2rem;
 }
 
-h1, h2, h3, h4, h5 {
-    margin-top: 0;
+.content-section {
+    h1, h2, h3, h4, h5 {
+        margin-top: 0;
+    }
+}
+
+.doc-content {
+    h1, h2, h3, h4, h5 {
+        margin-bottom: .1em;
+    }
 }
 
 a {
@@ -63,4 +71,22 @@ blockquote {
 
   /* Support for IE. */
   font-feature-settings: 'liga';
+}
+
+@for $i from 1 through 9 {
+    .mb-#{$i} {
+        margin-bottom: #{$i}rem;
+    }
+
+    .mt-#{$i} {
+        margin-top: #{$i}rem;
+    }
+
+    .mr-#{$i} {
+        margin-right: #{$i}rem;
+    }
+
+    .ml-#{$i} {
+        margin-left: #{$i}rem;
+    }
 }
