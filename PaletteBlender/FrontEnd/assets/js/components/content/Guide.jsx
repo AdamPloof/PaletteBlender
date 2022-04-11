@@ -15,7 +15,7 @@ export default function Guide() {
                 While there are no doubt plenty of ways to design a color palette, Palette Blender was built with a particular work flow in mind. The approach I'm referring to is based around the principle of choosing a single primary color (primary as in main, not necessarily red, green, or blue) that defines the visual identity of your site, a set of accent colors, and a set of grays. Each color should have a range of shades to fit the needs of background colors, borders, text, etc. I've been applying this system to my projects for some time and find it to be an effective way to design good looking sites with clear interfaces and organized stylesheets.
             </p>
             <p>
-                Rather than go into detail on the nuts and bolts behind this design philosophy here, I suggest checking out this article at refactoringui.com. The concepts there are explained very well and concisely. For the rest of this article, I'll be focusing more on my own experiences of applying this approach in projects and some of the lessons I've learned.
+                Rather than go into detail on the nuts and bolts behind this design philosophy here, I suggest checking out <a href="https://www.refactoringui.com/previews/building-your-color-palette">this article at Refactoring UI</a>. The concepts there are explained very well and concisely. For the rest of this article, I'll be focusing more on my own experiences of applying this approach in projects and some of the lessons I've learned.
             </p>
             <p>
                 It should be noted that I'm not a professional designer. Much of my day job is spent building small scale web apps that might take anywhere from a few days to a few months to build. Aesthetics is usually a secondary consideration for most of these projects. Still, I like it when things look nice and so do the end users.
@@ -39,10 +39,10 @@ export default function Guide() {
             </p>
             <h2>Interesting Alternatives</h2>
             <p>
-                While I think the approach mentioned here (and best described at refactoringui) is the most sensible for most applications where aesthetics is secondary to functionality, there are some sites that do seem to use a much more extensive color set effectively that I thought would be worth mentioning. One idea that can look quite nice is to chunk up pages into horizontal sections that each get their own color scheme with each section related in overall tone to the larger palette. A good example of this can be seen at remarkable.com.
+                While I think the approach mentioned here is the most sensible for most applications where aesthetics is secondary to functionality, there are some sites that do seem to use a much more extensive color set effectively that I thought would be worth mentioning. One idea that can look quite nice is to chunk up pages into horizontal sections that each get their own color scheme with each section related in overall tone to the larger palette. A good example of this can be seen at <a href="https://remarkable.com/">remarkable.com</a>.
             </p>
             <p>
-                The Mailchimp developer docs also stands out to me as a site that makes use of a wider range of accent colors beyond the typical info, success, warning, and danger paradigm.
+                The <a href="https://mailchimp.com/developer/">Mailchimp developer docs</a> also stand out to me as a site that makes use of a wider range of accent colors beyond the typical info, success, warning, and danger paradigm.
             </p>
             <p>
                 While Palette Blender doesn't (yet) have the ability to add additional sub palettes, this may be something to add in the future to facilitate these kinds of design.

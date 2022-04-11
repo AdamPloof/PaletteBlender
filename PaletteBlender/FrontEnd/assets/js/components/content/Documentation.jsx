@@ -5,7 +5,7 @@ export default function Documentation(props) {
         <div className="content doc-content">
             <h1>Palette Blender Docs</h1>
             <p>
-            Palette Blender is a tool to help you quickly design color schemes for your project. As you edit the colors in your palette the changes are reflected in real time in the app itself so that you can get a sense of how your color scheme will work in an actual web site.
+            Palette Blender is a tool to help you quickly design color schemes for your project. As you edit the colors in your palette changes are reflected in real time in the app itself so that you can get a sense of how your color scheme will work in an actual web site.
             </p>
             <p>
                 Color palettes in Palette Blender follow the common pattern of being made up of a primary color (and sometimes a secondary color) along with a set grays and contextual colors to provide visual cues. To learn more about this approach, check out the guide section. 
