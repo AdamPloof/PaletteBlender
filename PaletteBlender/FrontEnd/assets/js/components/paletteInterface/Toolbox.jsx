@@ -194,7 +194,7 @@ export default function Toolbox(props) {
                             <div className="output-selector">
                                 {getOutputOptions()}
                             </div>
-                            <div className="btn btn-sm btn-info" 
+                            <div className="btn btn-info" 
                                 onClick={copyCss}
                                 ref={setCopyBtn}
                                 onMouseEnter={showTooltip}

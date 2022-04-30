@@ -5,8 +5,12 @@ export default function Guide() {
         <div className="content doc-content">
             <h1>Color Palettes for Web Development</h1>
             <p>
-                Here's a scenario, you're starting a new project and you want to give it its own visual identity. That means you need to decide on a color palette. You don't have a ton of time to do mock ups or other design work. You sure as heck can't afford to pay someone to design it for you. So you do a search for “color palette generator”. A list of tools pop up and you eventually find one that seems pretty cool. After a bit fiddling you end up with a lovely row of color swatches that conveys the emotional essence of your project. Beautiful. But now what?
+                Here's a scenario, you're starting a new project and you want to give it its own visual identity. That means you need to decide on a color palette. You don't have a ton of time to do mock ups or other design work. You sure as heck can't afford to pay someone to design it for you. So you do a search for “color palette generator”. A list of tools pop up and you eventually find one that seems pretty cool. After a bit fiddling you end up with a lovely row of color swatches that conveys the emotional essence of your project.
             </p>
+            <div className="doc-image">
+                <img src={STATIC_PREFIX + 'PaletteBlender/images/docs/typical_palette.png'} alt="Several swatches of moderately saturated colors" />
+            </div>
+            <p>Beautiful. But now what?</p>
             <p>
                 Someone should have reminded you that you're designing a website, not the set of a Wes Anderson film. For building an actual website, you're going to need something a little different.
             </p>
@@ -24,7 +28,7 @@ export default function Guide() {
                 Define Your Palette at the Start of the Project 
             </h2>
             <p>
-                You should choose your color set early on in a project. Not for any artistic reasons per se, but for the practical reason that once you start writing CSS it's convenient if your colors are already defined. With that in mind, using CSS variables for colors with a consistent naming convention across projects is really helpful. It also makes swapping color palettes in and out of projects painless. Before Palette Blender, I'd have a basic starter palette that would get pasted in at the start of a project that would be tweaked as needed.
+                You should choose your color set early on in a project. Not for any artistic reasons per se, but for the practical reason that once you start writing CSS it's convenient if your colors are already defined. With that in mind, using CSS variables for colors with a consistent naming convention across projects is really helpful. It also makes swapping color palettes in and out of projects painless. Before Palette Blender, I'd have a basic starter palette that would get pasted in at the beginning of a project that would be tweaked as needed.
             </p>
             <h2>How Many Shades Do I Need?</h2>
             <p>

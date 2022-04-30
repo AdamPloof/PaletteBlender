@@ -29,6 +29,9 @@
     {% endblock %}
 
     {% block javascripts %}
+        <script type="text/javascript">
+            var STATIC_PREFIX = "{% get_static_prefix %}";
+        </script>
         <script type="text/javascript" src="{% static 'PaletteBlender/dist/bundle.js' %}"></script>
     {% endblock javascripts %}
 </body>
