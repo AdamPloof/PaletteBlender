@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import json
+import json, os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -85,13 +85,17 @@ WSGI_APPLICATION = 'PaletteBlender.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': env_vars['db_config']['DB_NAME'],
+    #     'USER': env_vars['db_config']['DB_USER'],
+    #     'PASSWORD': env_vars['db_config']['DB_PASS'],
+    #     'HOST': env_vars['db_config']['DB_HOST'],
+    #     'PORT': env_vars['db_config']['DB_PORT'],
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env_vars['db_config']['DB_NAME'],
-        'USER': env_vars['db_config']['DB_USER'],
-        'PASSWORD': env_vars['db_config']['DB_PASS'],
-        'HOST': env_vars['db_config']['DB_HOST'],
-        'PORT': env_vars['db_config']['DB_PORT'],
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

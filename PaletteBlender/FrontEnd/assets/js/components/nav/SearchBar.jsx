@@ -31,7 +31,7 @@ function SearchBar(props) {
                     <div className="nav-list">
                         <ul>
                             <li>
-                                <a className={"nav-link " + classes.navLinkMain} href="#">Logout</a>
+                                <a className={"nav-link " + classes.navLinkMain} href="#">Login</a>
                             </li>
                         </ul>    
                     </div>
