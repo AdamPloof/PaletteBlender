@@ -86,12 +86,8 @@ WSGI_APPLICATION = 'PaletteBlender.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env_vars['db_config']['DB_NAME'],
-        'USER': env_vars['db_config']['DB_USER'],
-        'PASSWORD': env_vars['db_config']['DB_PASS'],
-        'HOST': env_vars['db_config']['DB_HOST'],
-        'PORT': env_vars['db_config']['DB_PORT'],
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
