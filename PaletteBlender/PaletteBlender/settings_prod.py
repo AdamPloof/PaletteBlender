@@ -30,9 +30,11 @@ env_vars = json.loads(config_data)
 SECRET_KEY = env_vars['django_settings']['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'www.paletteblender.com',
+]
 
 
 # Application definition
