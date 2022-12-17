@@ -229,7 +229,7 @@ function PaletteViewer(props) {
         const rootHsl = color.hsl;
         const subPalette = [...colorPalette[props.selectedPaletteName]];
 
-        // For lightness increment: 80 / n = increment for each lightness step in the palette wheere n is the number of colors for that palette
+        // For lightness increment: 80 / n = increment for each lightness step in the palette where n is the number of colors for that palette
         const lightnessIncrement = (90 / subPalette.length);
         
         let hsl;
@@ -237,8 +237,11 @@ function PaletteViewer(props) {
         const centerColorIndex = Math.round(.5 * subPalette.length);
 
         for (let i = 0; i < subPalette.length; i++) {
-            // Leave the selected color alone
-            if (subPalette[i].name === props.selectedColor.name) {
+            if (subPalette[i].name == props.selectedColor.name) {
+                // Leave the selected color alone
+                continue;
+            } else if (subPalette[i].locked === true) {
+                // Same with locked colors -- leave em along. Obviously.
                 continue;
             }
 
